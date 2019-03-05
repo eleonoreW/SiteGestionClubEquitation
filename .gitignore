@@ -50,4 +50,3 @@ nbdist/
 **/glassfish-resources\.xml
 **/*.properties
 **/*MANIFEST*
-**/*project\.xml
