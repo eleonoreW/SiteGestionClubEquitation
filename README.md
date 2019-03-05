@@ -1,1 +1,1 @@
-SiteGestionClubEquitation
+GestionClubEquitation
