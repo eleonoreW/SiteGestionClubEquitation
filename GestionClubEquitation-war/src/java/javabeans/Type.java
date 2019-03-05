@@ -11,10 +11,23 @@ public class Type {
         this.description = description; 
     }
     
-    public Type(String nom, String description){
+    public Type(String name, String description){
         this.type_id = -1;
-        this.nom = nom;
+        this.nom = name;
         this.description = description; 
     }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    
     
 }
