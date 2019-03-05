@@ -48,5 +48,5 @@ nbdist/
 **/build-impl\.xml
 **/.DS_Store
 **/glassfish-resources\.xml
-**/*.properties
 **/*MANIFEST*
+**/*genfiles.properties
