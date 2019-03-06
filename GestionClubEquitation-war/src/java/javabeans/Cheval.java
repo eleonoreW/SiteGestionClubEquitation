@@ -38,6 +38,10 @@ public class Cheval {
         return cheval_id;
     }
 
+    public void setCheval_id(int cheval_id) {
+        this.cheval_id = cheval_id;
+    }
+
     public Race getRace() {
         return race;
     }

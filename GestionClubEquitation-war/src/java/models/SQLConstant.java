@@ -12,8 +12,12 @@ public class SQLConstant {
     
     
     // CHEVAL
+    public static final String SELECT_ALL_CHEVAL = "SELECT * FROM Cheval";
+    public static final String SELECT_ALL_CHEVAL_BY_NAME = "SELECT * FROM Cheval WHERE Nom=?";
+    public static final String SELECT_ALL_CHEVAL_BY_ID = "SELECT * FROM Cheval WHERE ID=?";
     public static final String INSERT_CHEVAL = "INSERT INTO Cheval(ID, RaceID,PersonneID, Nom, DateNaissance,Description,Commentaire,NbHeureMaxSemaine,Taille) VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
-    
+    public static final String UPDATE_CHEVAL = "UPDATE Cheval SET RaceID = ?, PersonneID = ?, Nom = ?, DateNaissance = ?, Description = ?, Commentaire = ?, NbHeureMaxSemaine = ?, Taille = ?  WHERE ID = ?";
+    public static final String DELETE_CHEVAL = "DELETE FROM Cheval WHERE ID = ?";
     
     // TYPE
     public static final String SELECT_ALL_TYPE = "SELECT * FROM Type";

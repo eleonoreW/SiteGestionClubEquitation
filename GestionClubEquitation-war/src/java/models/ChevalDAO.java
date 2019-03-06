@@ -5,28 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javabeans.Cheval;
+import javabeans.Client;
 import javabeans.Personne;
 import javabeans.Race;
 import models.CommonDAO;
 
+public class ChevalDAO extends CommonDAO<Cheval> {
 
-public class ChevalDAO extends CommonDAO<Cheval>{
-    
     private Cheval cheval;
+    private ArrayList<Cheval> listCheval = new ArrayList<>();
     
-    public ChevalDAO(Connection connection){
+    public ChevalDAO(Connection connection) {
         super(connection);
     }
-    
+
     @Override
     public Cheval create(Cheval object) {
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_CHEVAL);
-            
-            //statement.setString(1, object.getRace());
+
             statement.setInt(1, object.getRace().getRace_id());
-            statement.setObject(2, object.getProprietaire().getPersonne_id());
+            statement.setInt(2, object.getProprietaire().getPersonne_id());
             statement.setString(3, object.getNom());
             statement.setString(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
@@ -36,51 +38,178 @@ public class ChevalDAO extends CommonDAO<Cheval>{
             
             statement.executeUpdate();
             statement.close();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return object;
     }
 
     @Override
     public boolean delete(Cheval object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CHEVAL);
+            
+            statement.setInt(1, object.getCheval_id());
+            
+            statement.executeUpdate();
+            statement.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
     }
 
     @Override
     public boolean update(Cheval object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_RACE);
+            
+            statement.setInt(1, object.getRace().getRace_id());
+            statement.setInt(2, object.getProprietaire().getPersonne_id());
+            statement.setString(3, object.getNom());
+            statement.setString(4, object.getDateNaissance());
+            statement.setString(5, object.getDescription());
+            statement.setString(6, object.getCommentaire());
+            statement.setInt(7, object.getNbHeureMaxSemaine());
+            statement.setInt(8, object.getTaille());
+            statement.setInt(9, object.getCheval_id());
+            
+            statement.executeUpdate();
+            statement.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
     }
 
     @Override
     public Cheval findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        cheval = null;
+        Race race = null;
+        Personne personne = null;
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CHEVAL_BY_ID);
+            statement.setInt(1,id);
+            ResultSet res = statement.executeQuery();
+            
+            RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+            PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
 
+            if(res.next()){
+                race = raceDAO.findById(res.getInt("ID"));
+                personne = personneDAO.findById(res.getInt("ID"));
+                cheval = new Cheval(res.getInt("ID"),race,personne,res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+            }
+            statement.close();
+            res.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cheval;
+    }
+    
     @Override
     public Cheval findByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cheval = null;
+        Race race = null;
+        Personne personne = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CHEVAL_BY_NAME);
+            statement.setString(1, name);
+            ResultSet res = statement.executeQuery();
+            
+            RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+            PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+           
+            if(res.next()) {
+                race = raceDAO.findById(res.getInt("ID"));
+                personne = personneDAO.findById(res.getInt("ID"));
+                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+            }
+            statement.close();
+            res.close();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return cheval;
     }
 
     @Override
     public ArrayList<Cheval> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        listCheval = new ArrayList<>();
+        Race race = null;
+        Personne personne = null;
+        
+        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        try {
+            ResultSet res = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)
+                    .executeQuery(SQLConstant.SELECT_ALL_CHEVAL);
+            
+            while(res.next()) {
+                race = raceDAO.findById(res.getInt("ID"));
+                personne = personneDAO.findById(res.getInt("ID"));
+                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+                listCheval.add(cheval);
+            }
+            res.close();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return listCheval;
     }
+
     // PAS FINI
     public static void main(String args[]) {
-        System.out.println("On est dans le main");
         
-        Race race = new Race("cheval rouge");
-        Personne proprietaire = new Personne("DUPONT","Toto","duponttoto@toto.com","0607080900",28031998,10,"client");
+        System.out.println("On est dans le main de ChevalDAO");
+        List<Cheval> listCheval;
+        Cheval cheval2;
+        Race race = new Race("Joli Cheval");
+        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+        race = raceDAO.findByName(race.getNom());
         
-        Cheval cheval = new Cheval(race, proprietaire, "Zeus", "241096", "descriptionducheval","commentairecheval", 10, 175);
+        Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998, 10, Client.class.getName());
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        proprietaire = personneDAO.findByName(proprietaire.getNom());
         
-        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
-        
-        if(chevalDAO.findByName(cheval.getNom()) == null) {
-            System.out.println("Toto");
-            chevalDAO.create(cheval);
+        if(race != null){
+            System.out.println("Race existe"); 
+            
+            if(proprietaire != null){
+                System.out.println("Personne existe");
+                Cheval cheval = new Cheval(race, proprietaire, "Zeus", "241096", "descriptionducheval", "commentairecheval", 10, 175);
+                ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+                if(chevalDAO.findByName(cheval.getNom()) == null){
+                   System.out.println("Toto");
+                   chevalDAO.create(cheval);
+                   
+                   cheval = chevalDAO.findByName(cheval.getNom());
+                   System.out.println(cheval.getCheval_id());
+                   chevalDAO.delete(cheval);
+                }
+                    
+                
+            }
         }
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        listCheval = chevalDAO.findAll();
+        
+        Iterator<Cheval> it = listCheval.iterator();
+        
+        while(it.hasNext()){
+            cheval2 = (Cheval)it.next();
+            System.out.println(cheval2.getNom());
+        }
+      
     }
 }
