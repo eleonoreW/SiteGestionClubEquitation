@@ -50,3 +50,5 @@ nbdist/
 **/glassfish-resources\.xml
 **/*MANIFEST*
 **/*genfiles.properties
+/nbproject/private/
+GestionClubEquitation-war/nbproject/project\.xml
