@@ -20,7 +20,5 @@ public abstract class CommonDAO<T> {
     
     public abstract T findById(int id);
     
-    public abstract T findByName(String name);
-    
     public abstract ArrayList<T> findAll();
 }

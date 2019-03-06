@@ -112,8 +112,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         }
         return cheval;
     }
-    
-    @Override
+
     public Cheval findByName(String name) {
         cheval = null;
         Race race = null;
