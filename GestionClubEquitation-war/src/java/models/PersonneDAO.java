@@ -55,7 +55,23 @@ public class PersonneDAO extends CommonDAO<Personne>{
 
     @Override
     public boolean update(Personne object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_PERSONNE);
+            statement.setString(1, object.getPrenom());
+            statement.setString(2, object.getNom());
+            statement.setString(3, object.getMail());
+            statement.setString(4, object.getTelephone());
+            statement.setString(5, Integer.toString(object.getDate_naissance()));
+            statement.setString(6, Integer.toString(object.getNbHeureMaxSemaine()));
+            statement.setString(7, object.getClass().getName());
+            statement.setString(8, Integer.toString(object.getPersonne_id()));
+            statement.executeUpdate();
+            statement.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -77,13 +93,12 @@ public class PersonneDAO extends CommonDAO<Personne>{
         return personne;
     }
 
-    @Override
-    public Personne findByName(String name) {
+    public Personne findByMail(String mail) {
          personne = null;
         try {
             ResultSet res;
-             try (PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_PERSONNE_BY_NAME)) {
-                 statement.setString(1, name);
+             try (PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_PERSONNE_BY_MAIL)) {
+                 statement.setString(1, mail);
                  res = statement.executeQuery();
                  if(res.next()) {
                      personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"),res.getInt("NbHeureActiviteMaxSemaine"),res.getString("Discriminator"));
@@ -122,7 +137,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
         Personne typeTest2;
         
         PersonneDAO typeDAO = new PersonneDAO(ConnectionDB.getInstance());
-        if(typeDAO.findByName(typeTest.getNom()) == null) {
+        if(typeDAO.findByMail(typeTest.getMail()) == null) {
             typeDAO.create(typeTest);
         } 
         
@@ -132,10 +147,11 @@ public class PersonneDAO extends CommonDAO<Personne>{
         
         while(it.hasNext()){
             typeTest2 = (Personne)it.next();
-            System.out.println(typeTest2.getNom() + " " + typeTest2.getPrenom());
+            System.out.println(typeTest2.getMail() + " " + typeTest2.getNom()+" "+typeTest2.getPrenom());
         }
-        
-        typeTest = typeDAO.findByName(typeTest.getNom());
-        typeDAO.delete(typeTest);
+        typeTest = typeDAO.findByMail(typeTest.getMail());
+        Personne typeTestUpdate = new Personne(typeTest.getPersonne_id(),"DUPONT","Bobby","duponttoto@toto.com","0699999999",28031998,15,Client.class.getName());
+        typeDAO.update(typeTestUpdate);
+        //typeDAO.delete(typeTest);
     }
 }
