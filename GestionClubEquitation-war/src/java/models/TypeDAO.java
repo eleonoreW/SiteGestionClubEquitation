@@ -93,7 +93,6 @@ public class TypeDAO extends CommonDAO<Type> {
         return type;
     }
 
-    @Override
     public Type findByName(String name) {
         type = null;
         try {

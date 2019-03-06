@@ -65,7 +65,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
     @Override
     public boolean update(Cheval object) {
         try {
-            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_RACE);
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_CHEVAL);
             
             statement.setInt(1, object.getRace().getRace_id());
             statement.setInt(2, object.getProprietaire().getPersonne_id());
@@ -126,8 +126,8 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
            
             if(res.next()) {
-                race = raceDAO.findById(res.getInt("ID"));
-                personne = personneDAO.findById(res.getInt("ID"));
+                race = raceDAO.findById(res.getInt("RaceID"));
+                personne = personneDAO.findById(res.getInt("PersonneID"));
                 cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
             }
             statement.close();
@@ -173,34 +173,38 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         System.out.println("On est dans le main de ChevalDAO");
         List<Cheval> listCheval;
         Cheval cheval2;
+        
         Race race = new Race("Joli Cheval");
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         race = raceDAO.findByName(race.getNom());
         
         Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998, 10, Client.class.getName());
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
-        proprietaire = personneDAO.findByName(proprietaire.getNom());
+        proprietaire = personneDAO.findByMail(proprietaire.getMail());
         
         if(race != null){
-            System.out.println("Race existe"); 
-            
             if(proprietaire != null){
-                System.out.println("Personne existe");
                 Cheval cheval = new Cheval(race, proprietaire, "Zeus", "241096", "descriptionducheval", "commentairecheval", 10, 175);
                 ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
                 if(chevalDAO.findByName(cheval.getNom()) == null){
-                   System.out.println("Toto");
                    chevalDAO.create(cheval);
-                   
                    cheval = chevalDAO.findByName(cheval.getNom());
-                   System.out.println(cheval.getCheval_id());
-                   chevalDAO.delete(cheval);
+                   //chevalDAO.delete(cheval);
+      
+                   Cheval chevalUpdate = new Cheval(cheval.getRace(), cheval.getProprietaire(), "Bouteille", "241096", "descriptionducheval", "commentairecheval", 10, 175);
+                   cheval.setDescription(("autre description du super cheval"));
+                   chevalUpdate = chevalDAO.findByName(cheval.getNom());
+                   
+          
+                   
+                   
+                   chevalDAO.update(cheval);
                 }
-                    
                 
             }
         }
         ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        
         listCheval = chevalDAO.findAll();
         
         Iterator<Cheval> it = listCheval.iterator();
@@ -209,6 +213,8 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             cheval2 = (Cheval)it.next();
             System.out.println(cheval2.getNom());
         }
+        
+        
       
     }
 }

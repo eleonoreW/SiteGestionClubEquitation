@@ -74,7 +74,37 @@ public class Cheval {
         return taille;
     }
 
-    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public void setProprietaire(Personne proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDateNaissance(String dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public void setNbHeureMaxSemaine(int nbHeureMaxSemaine) {
+        this.nbHeureMaxSemaine = nbHeureMaxSemaine;
+    }
+
+    public void setTaille(int taille) {
+        this.taille = taille;
+    }
     
     
 }
