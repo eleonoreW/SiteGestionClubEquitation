@@ -32,20 +32,75 @@
         <section id="adminSection">
                   
             <div id="formulaire">
-            <center><h2>Ajout d'un nouvel utilisateur</h2>
+            <center><h2>Ajout d'un nouvel administrateur</h2>
 
 
-            <s:form action="AddNewEmployeeForm" >		
+            <s:form action="AddNewAdminForm" >		
 
-                <s:textfield name="employee_firstname" id="employee_firstname"
-                        label="FirstName" labelposition="left" required="required" autofocus="autofocus">
+                <s:textfield name="admin_nom" id="admin_firstname"
+                        label="nom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>	
-                <s:textfield name="employee_lastname" id="employee_lastname"
-                        label="LastName" labelposition="left" required="required">
+                <s:textfield name="admin_prenom" id="admin_prenom"
+                        label="prenom" labelposition="left" required="required">
                 </s:textfield>	
-
+                <s:textfield name="admin_mail" id="admin_mail"
+                        label="mail" labelposition="left" required="required">
+                </s:textfield>	
+                <s:textfield name="admin_tel" id="admin_tel"
+                        label="tel" labelposition="left" required="required">
+                </s:textfield>
+                <s:textfield name="admin_datenaissance" id="admin_datenaissance"
+                        label="date de naissance" labelposition="left" required="required">
+                </s:textfield>
                 <s:submit value = "Register" align="center"></s:submit>
 
-
             </s:form>
+                
+        <s:if test="%{bookList.size()>0}" >
+        <s:iterator value="bookList">        
+    
+            <div id="line1">
+                
+                  <div id="cover">
+                      <img src=" <s:property value='getImage_path()'/> ">
+                
+                  </div>
+                
+                  <div id="book_text">
+                        <div id="book_title">   
+                             <b>Title : </b><b><s:property value="book.getTitle()"/></b>
+                        </div>
+                      
+                        <div id="book_author">   
+                            <b>Author : </b><s:property value="author[#pos.index].getAuthor_lastname()"/>
+                            <s:property value="author[#pos.index].getAuthor_firstname()"/>
+                        </div>
+                        <div id="book_editor">   
+                            <b>Editor : </b><s:property value="getEditor().getEditor_name()"/>
+                        </div>
+                        <div id="book_category">   
+                            <b>Category : </b><s:property value="getCategory().getCategory_name()"/>/ <b>Price :</b><s:property value="getBook_price()"/>
+                        </div>
+                      
+                        <div id="book_publication_date">               
+                                <b>Published :</b><s:property value="getPublication_date()"/>                           
+                        </div>
+                      
+                        <div id="book_isbn">               
+                                <b>Isbn : </b><s:property value="getiSBN()"/>                                
+                        </div>
+                      
+                        <div id="book_information">               
+                             <s:property value="getBook_description()"/>
+                        </div>
+                
+            </div>
+        </div>  
+        </s:iterator>  
+        </s:if>
+        <s:else>
+            No book stored in database
+        </s:else>   
+                
+                
 	</div>    
