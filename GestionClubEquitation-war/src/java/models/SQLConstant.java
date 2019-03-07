@@ -36,12 +36,17 @@ public class SQLConstant {
     public static final String DELETE_LIEU = "DELETE FROM Lieu WHERE ID = ?";
     
 	
-	 // PERSONNE
+    // PERSONNE
     public static final String SELECT_ALL_PERSONNE = "SELECT * FROM Personne";
     public static final String SELECT_ALL_PERSONNE_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
     public static final String SELECT_ALL_PERSONNE_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
     public static final String SELECT_PERSONNE_BY_ID = "SELECT * FROM Personne WHERE ID=?";
-    public static final String INSERT_PERSONNE = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,NbHeureActiviteMaxSemaine,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
-    public static final String UPDATE_PERSONNE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,NbHeureActiviteMaxSemaine = ?,Discriminator = ? WHERE ID = ?";
+    public static final String INSERT_PERSONNE = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?)";
+    public static final String UPDATE_PERSONNE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_PERSONNE = "DELETE FROM Personne WHERE ID = ?";
+    
+    // PERSONNE
+    public static final String INSERT_EMPLOYE = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,NbHeureMaxSemaine,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
+    public static final String UPDATE_EMPLOYE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,NbHeureMaxSemaine =?, Discriminator = ? WHERE ID = ?";
+    
 }
