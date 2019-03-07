@@ -58,7 +58,7 @@ public class RaceDAO extends CommonDAO<Race>{
             PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_RACE);
             
             statement.setString(1, object.getNom());
-            statement.setInt(3, object.getRace_id());
+            statement.setInt(2, object.getRace_id());
             
             statement.executeUpdate();
             statement.close();
