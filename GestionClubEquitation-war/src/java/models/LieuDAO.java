@@ -96,7 +96,6 @@ public class LieuDAO extends CommonDAO<Lieu> {
         return lieu;
     }
 
-    @Override
     public Lieu findByName(String name) {
         lieu = null;
         try {
