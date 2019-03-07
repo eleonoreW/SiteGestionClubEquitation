@@ -48,6 +48,10 @@ public class Reservation {
     public Activite getActivite() {
         return activite;
     }
+
+    public void setNbPersonne(int nbPersonne) {
+        this.nbPersonne = nbPersonne;
+    }
     
     
 }

@@ -84,6 +84,10 @@ public class Activite {
     public boolean getEst_active() {
         return est_active;
     }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
     
     
 }
