@@ -26,7 +26,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_ACTIVITE);
 
-            statement.setInt(1, object.getPersonne().getPersonne_id());
+            statement.setInt(1, object.getPersonne().getId());
             statement.setInt(2, object.getLieu().getLieu_id());
             statement.setInt(3, object.getType().getType_id());
             statement.setString(4, object.getNom());
@@ -68,7 +68,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_ACTIVITE);
             
-            statement.setInt(1, object.getPersonne().getPersonne_id());
+            statement.setInt(1, object.getPersonne().getId());
             statement.setInt(2, object.getLieu().getLieu_id());
             statement.setInt(3, object.getType().getType_id());
             statement.setString(4, object.getNom());

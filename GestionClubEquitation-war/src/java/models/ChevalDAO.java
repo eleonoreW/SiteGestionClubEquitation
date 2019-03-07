@@ -28,7 +28,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_CHEVAL);
 
             statement.setInt(1, object.getRace().getRace_id());
-            statement.setInt(2, object.getProprietaire().getPersonne_id());
+            statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
             statement.setString(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
@@ -68,7 +68,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_CHEVAL);
             
             statement.setInt(1, object.getRace().getRace_id());
-            statement.setInt(2, object.getProprietaire().getPersonne_id());
+            statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
             statement.setString(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
@@ -178,7 +178,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         race = raceDAO.findByName(race.getNom());
         
-        Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998);
+        Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998,"pwd");
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
         proprietaire = personneDAO.findByMail(proprietaire.getMail());
         

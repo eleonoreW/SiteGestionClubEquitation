@@ -27,7 +27,7 @@ public class ReservationDAO extends CommonDAO<Reservation>{
             statement.setInt(1, object.getDate());
             statement.setInt(2, object.getNbPersonne());
             statement.setInt(3, object.getEstActive());
-            statement.setInt(4, object.getPersonne().getPersonne_id());
+            statement.setInt(4, object.getPersonne().getId());
             statement.setInt(5, object.getActivite().getActivite_id());
             
 
@@ -63,7 +63,7 @@ public class ReservationDAO extends CommonDAO<Reservation>{
             statement.setInt(1, object.getDate());
             statement.setInt(2, object.getNbPersonne());
             statement.setInt(3, object.getEstActive()); 
-            statement.setInt(4, object.getPersonne().getPersonne_id());
+            statement.setInt(4, object.getPersonne().getId());
             statement.setInt(5, object.getActivite().getActivite_id());
             statement.setInt(6, object.getReservation_ID());
             
@@ -111,7 +111,7 @@ public class ReservationDAO extends CommonDAO<Reservation>{
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_RESERVATION_BY_DATE_PERSONNE_ACTIVITE);
             statement.setInt(1, date);
-            statement.setObject(2, personne.getPersonne_id());
+            statement.setObject(2, personne.getId());
             statement.setObject(3,activite.getActivite_id());
             ResultSet res = statement.executeQuery();
 

@@ -8,29 +8,121 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javabeans.Client;
-import javabeans.Personne;
+
 
 public class ClientDAO extends CommonDAO<Client>{
-
     Client client;
     ArrayList<Client> clientList;
+    
     public ClientDAO(Connection connection) {
         super(connection);
     }
-    
-    
+
+    @Override
+    public Client create(Client object) {
+        try {
+            PreparedStatement statement;
+            statement = connection.prepareStatement(SQLConstant.INSERT_CLIENT);
+            statement.setString(1, object.getPrenom());
+            statement.setString(2, object.getNom());
+            statement.setString(3, object.getMail());
+            statement.setString(4, object.getTelephone());
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
+            statement.executeUpdate();
+            statement.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return object;
+    }
+
+    @Override
+    public boolean delete(Client object) {
+        try {
+            try (PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CLIENT)) {
+                statement.setString(1, Integer.toString(object.getId()));
+                statement.executeUpdate();
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean update(Client object) {
+        try {
+            PreparedStatement statement;
+            statement = connection.prepareStatement(SQLConstant.UPDATE_CLIENT);
+            statement.setString(1, object.getPrenom());
+            statement.setString(2, object.getNom());
+            statement.setString(3, object.getMail());
+            statement.setString(4, object.getTelephone());
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
+            statement.setInt(8, object.getId());
+            statement.executeUpdate();
+            statement.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Client findById(int id) {
+        client = null;
+        try {
+            ResultSet res;
+            try (PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_CLIENT_BY_ID)) {
+                statement.setString(1, Integer.toString(id));
+                res = statement.executeQuery();
+                if(res.next()) {
+                    client = new Client(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
+                }
+            }
+            res.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
+    }
+
+    public Client findByMail(String mail) {
+        client = null;
+        try {
+            ResultSet res;
+             try (PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CLIENT_BY_MAIL)) {
+                 statement.setString(1, mail);
+                 res = statement.executeQuery();
+                 if(res.next()) {
+                     client = new Client(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
+                 }}
+            res.close();
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return client;
+    }
+
+    @Override
     public ArrayList<Client> findAll() {
         clientList = new ArrayList<>();
         try {
-                PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_PERSONNE_BY_SUBCLASS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-                
+                PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CLIENT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 statement.setString(1, Client.class.getName());
                 
-               
-                ResultSet res = statement.executeQuery(SQLConstant.SELECT_ALL_PERSONNE);
-                
+                ResultSet res = statement.executeQuery();
                 while(res.next()) {
-                    client = new Client(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                    client = new Client(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                     clientList.add(client);
                 }
         } catch(SQLException e) {
@@ -39,52 +131,29 @@ public class ClientDAO extends CommonDAO<Client>{
         return clientList;
     }
     
+    
     public static void main(String args[]) {
         System.out.println("On est dans le main de ClientDAO");
-        List<Personne> listPersonneTest;
-        Personne clientTest = new Client("DUPONT","Toto","789@toto.com","0607080900",28031998);
-        Personne clientTest2;
+        List<Client> listClientTest;
+        Client clientTest = new Client("ClientTestCreate","Toto","789@ClientTest.com","0607080900",28031998,"pwd");
+        Client clientTest2;
         
-        PersonneDAO typeDAO = new EmployeDAO(ConnectionDB.getInstance());
-        if(typeDAO.findByMail(clientTest.getMail()) == null) {
-            typeDAO.create(clientTest);
+        ClientDAO clientDAO = new ClientDAO(ConnectionDB.getInstance());
+        if(clientDAO.findByMail(clientTest.getMail()) == null) {
+            clientDAO.create(clientTest);
         } 
         
-        listPersonneTest = typeDAO.findAll();
+        listClientTest = clientDAO.findAll();
         
-        Iterator<Personne> it = listPersonneTest.iterator();
+        Iterator<Client> it = listClientTest.iterator();
         
         while(it.hasNext()){
-            clientTest2 = (Personne)it.next();
+            clientTest2 = (Client)it.next();
             System.out.println(clientTest2.getMail() + " " + clientTest2.getNom()+" "+clientTest2.getPrenom());
         }
-        clientTest = typeDAO.findByMail(clientTest.getMail());
-        Personne clientTestUpdate = new Client(clientTest.getPersonne_id(),"DUPONT","Bobby","789@toto.com","0699999999",28031998);
-        typeDAO.update(clientTestUpdate);
-        //typeDAO.delete(clientTest);
-    }
-
-    @Override
-    public Client create(Client object) {
-        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
-        Personne p = personneDAO.create(object);
-        
-        object.setPersonne_id(p.getPersonne_id());
-        return object;       
-    }
-
-    @Override
-    public boolean delete(Client object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean update(Client object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Client findById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        clientTest = clientDAO.findByMail(clientTest.getMail());
+        Client clientTestUpdate = new Client(clientTest.getId(),"ClientTestUpdate","Bobby","789@ClientTest.com","0699999999",28031998,"pwd");
+        clientDAO.update(clientTestUpdate);
+        clientDAO.delete(clientTest);
     }
 }
