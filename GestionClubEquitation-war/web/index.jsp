@@ -12,6 +12,10 @@
     <!------ /HEAD ------->  
     
     <body>
+        <!------ MENU ------>
+        <%@ include file="jsp/template/Menu.jsp"%>
+        <!------ /MENU ------>
+        
       <h1>Hello World From Struts2</h1>
       <form action = "hello">
          <label for = "name">Please enter your name</label><br/>

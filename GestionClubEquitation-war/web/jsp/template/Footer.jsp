@@ -1,6 +1,6 @@
     <footer class="py-5 bg-dark">
         <div class="container">
-            <p class="m-0 text-center text-white">2019 - All rights reserved - Mathieu Herranz Perez</p>
+            <p class="m-0 text-center text-white">2019 - Tous droits réservés -</p>
         </div>
       <!-- /.container -->
     </footer>
