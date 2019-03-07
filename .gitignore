@@ -47,6 +47,7 @@ nbdist/
 **/build\.xml
 **/build-impl\.xml
 **/.DS_Store
+**/.properties
 **/glassfish-resources\.xml
 **/*MANIFEST*
 **/*genfiles.properties
@@ -54,3 +55,7 @@ nbdist/
 GestionClubEquitation-war/nbproject/project\.xml
 
 *.properties
+
+GestionClubEquitation-war/nbproject/
+
+nbproject/
