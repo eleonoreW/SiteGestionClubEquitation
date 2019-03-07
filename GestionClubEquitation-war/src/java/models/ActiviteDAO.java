@@ -136,7 +136,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         //(ID, PersonneID, LieuID, TypeID, Nom, Commentaire, Details, Date, Duree, Capacite, EstActive)
 
         //Personne
-        Personne personne = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998, 10, Client.class.getName());
+        Personne personne = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998);
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
         personne = personneDAO.findByMail(personne.getMail());
         //Lieu

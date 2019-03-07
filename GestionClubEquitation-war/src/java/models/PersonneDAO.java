@@ -12,8 +12,8 @@ import javabeans.Personne;
 
 
 public class PersonneDAO extends CommonDAO<Personne>{
-    private Personne personne;
-    private ArrayList<Personne> personneList;
+    Personne personne;
+    ArrayList<Personne> personneList;
     
     public PersonneDAO(Connection connection) {
         super(connection);
@@ -131,12 +131,12 @@ public class PersonneDAO extends CommonDAO<Personne>{
     public static void main(String args[]) {
         System.out.println("On est dans le main de PersonneDAO");
         List<Personne> listPersonneTest;
-        Personne typeTest = new Personne("DUPONT","Toto","azerty@toto.com","0607080900",28031998);
-        Personne typeTest2;
+        Personne personneTest = new Personne("DUPONT","Toto","789@toto.com","0607080900",28031998);
+        Personne personneTest2;
         
         PersonneDAO typeDAO = new PersonneDAO(ConnectionDB.getInstance());
-        if(typeDAO.findByMail(typeTest.getMail()) == null) {
-            typeDAO.create(typeTest);
+        if(typeDAO.findByMail(personneTest.getMail()) == null) {
+            typeDAO.create(personneTest);
         } 
         
         listPersonneTest = typeDAO.findAll();
@@ -144,12 +144,12 @@ public class PersonneDAO extends CommonDAO<Personne>{
         Iterator<Personne> it = listPersonneTest.iterator();
         
         while(it.hasNext()){
-            typeTest2 = (Personne)it.next();
-            System.out.println(typeTest2.getMail() + " " + typeTest2.getNom()+" "+typeTest2.getPrenom());
+            personneTest2 = (Personne)it.next();
+            System.out.println(personneTest2.getMail() + " " + personneTest2.getNom()+" "+personneTest2.getPrenom());
         }
-        typeTest = typeDAO.findByMail(typeTest.getMail());
-        Personne typeTestUpdate = new Personne(typeTest.getPersonne_id(),"DUPONT","Bobby","duponttoto@toto.com","0699999999",28031998);
-        typeDAO.update(typeTestUpdate);
-        typeDAO.delete(typeTest);
+        personneTest = typeDAO.findByMail(personneTest.getMail());
+        Personne personneTestUpdate = new Personne(personneTest.getPersonne_id(),"DUPONT","Bobby","789@toto.com","0699999999",28031998);
+        typeDAO.update(personneTestUpdate);
+        typeDAO.delete(personneTest);
     }
 }

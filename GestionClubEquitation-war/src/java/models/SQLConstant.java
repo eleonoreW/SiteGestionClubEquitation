@@ -45,10 +45,12 @@ public class SQLConstant {
     public static final String UPDATE_PERSONNE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_PERSONNE = "DELETE FROM Personne WHERE ID = ?";
     
-    // PERSONNE
+    // PERSONNE SPECIAL
+    public static final String SELECT_ALL_PERSONNE_BY_SUBCLASS = "SELECT * FROM Personne WHERE Discriminator=?";
+    
+    // EMPLOYE
     public static final String INSERT_EMPLOYE = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,NbHeureMaxSemaine,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
     public static final String UPDATE_EMPLOYE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,NbHeureMaxSemaine =?, Discriminator = ? WHERE ID = ?";
-    
     
     // RESERVATION
     public static final String SELECT_ALL_RESERVATION = "SELECT * FROM Reservation";
