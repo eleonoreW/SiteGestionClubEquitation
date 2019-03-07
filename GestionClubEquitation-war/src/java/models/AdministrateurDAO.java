@@ -27,8 +27,9 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
             statement.setString(4, object.getTelephone());
-            statement.setString(5, Integer.toString(object.getDate_naissance()));
-            statement.setString(6, object.getClass().getName());
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
             statement.executeUpdate();
             statement.close();
         } catch(SQLException e) {
@@ -61,9 +62,10 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
             statement.setString(4, object.getTelephone());
-            statement.setString(5, Integer.toString(object.getDate_naissance()));
-            statement.setString(6, object.getClass().getName());
-            statement.setString(7, Integer.toString(object.getId()));
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
+            statement.setInt(8, object.getId());
             statement.executeUpdate();
             statement.close();
         } catch(SQLException e) {
@@ -82,7 +84,7 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
                 statement.setString(1, Integer.toString(id));
                 res = statement.executeQuery();
                 if(res.next()) {
-                    admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                    admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                 }
             }
             res.close();
@@ -100,7 +102,7 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
                  statement.setString(1, mail);
                  res = statement.executeQuery();
                  if(res.next()) {
-                     admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                     admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                  }}
             res.close();
             
@@ -120,7 +122,7 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
                 
                 ResultSet res = statement.executeQuery();
                 while(res.next()) {
-                    admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                    admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                     adminList.add(admin);
                 }
         } catch(SQLException e) {
@@ -133,7 +135,7 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
     public static void main(String args[]) {
         System.out.println("On est dans le main de AdministrateurDAO");
         List<Administrateur> listAdministrateurTest;
-        Administrateur adminTest = new Administrateur("AdministrateurTestCreate","Toto","789@AdministrateurTest.com","0607080900",28031998);
+        Administrateur adminTest = new Administrateur("AdministrateurTestCreate","Toto","789@AdministrateurTest.com","0607080900",28031998,"pwd");
         Administrateur adminTest2;
         
         AdministrateurDAO adminDAO = new AdministrateurDAO(ConnectionDB.getInstance());
@@ -150,7 +152,7 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
             System.out.println(adminTest2.getMail() + " " + adminTest2.getNom()+" "+adminTest2.getPrenom());
         }
         adminTest = adminDAO.findByMail(adminTest.getMail());
-        Administrateur adminTestUpdate = new Administrateur(adminTest.getId(),"AdministrateurTestUpdate","Bobby","789@AdministrateurTest.com","0699999999",28031998);
+        Administrateur adminTestUpdate = new Administrateur(adminTest.getId(),"AdministrateurTestUpdate","Bobby","789@AdministrateurTest.com","0699999999",28031998,"pwd");
         adminDAO.update(adminTestUpdate);
         adminDAO.delete(adminTest);
     }

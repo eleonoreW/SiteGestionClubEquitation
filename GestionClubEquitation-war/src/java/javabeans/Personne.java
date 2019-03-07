@@ -7,19 +7,21 @@ public class Personne {
     private String mail;
     private String telephone;
     private int date_naissance;
-   
-    public Personne(){}
-    
-    public Personne(int personne_id, String nom, String prenom, String mail, String telephone, int date_naissance){
-        this.id = personne_id;
+    private String password;
+
+    public Personne(int id, String nom, String prenom, String mail, String telephone, int date_naissance, String password) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.telephone = telephone;
         this.date_naissance = date_naissance;
+        this.password = password;
     }
+   
+    public Personne(){}
     
-    public Personne(String nom, String prenom, String mail, String telephone, int date_naissance){
+    public Personne(String nom, String prenom, String mail, String telephone, int date_naissance, String password){
         this.id = -1;
         this.nom = nom;
         this.prenom = prenom;
@@ -27,6 +29,7 @@ public class Personne {
         this.telephone = telephone;
         this.telephone = telephone;
         this.date_naissance = date_naissance;
+        this.password = password;
     }
     
     public int getId() {
@@ -77,4 +80,11 @@ public class Personne {
         this.date_naissance = date_naissance;
     }
     
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -26,8 +26,9 @@ public class PersonneDAO extends CommonDAO<Personne>{
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
             statement.setString(4, object.getTelephone());
-            statement.setString(5, Integer.toString(object.getDate_naissance()));
-            statement.setString(6, object.getClass().getName());
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
             statement.executeUpdate();
             statement.close();
         } catch(SQLException e) {
@@ -59,9 +60,10 @@ public class PersonneDAO extends CommonDAO<Personne>{
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
             statement.setString(4, object.getTelephone());
-            statement.setString(5, Integer.toString(object.getDate_naissance()));
-            statement.setString(6, object.getClass().getName());
-            statement.setString(7, Integer.toString(object.getId()));
+            statement.setInt(5, object.getDate_naissance());
+            statement.setString(6, object.getPassword());
+            statement.setString(7, object.getClass().getName());
+            statement.setInt(8, object.getId());
             statement.executeUpdate();
             statement.close();
         } catch(SQLException e) {
@@ -80,7 +82,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
                 statement.setString(1, Integer.toString(id));
                 res = statement.executeQuery();
                 if(res.next()) {
-                    personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                    personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                 }
             }
             res.close();
@@ -98,7 +100,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
                  statement.setString(1, mail);
                  res = statement.executeQuery();
                  if(res.next()) {
-                     personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                     personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                  }}
             res.close();
             
@@ -116,7 +118,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
             try (ResultSet res = this.connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)
                     .executeQuery(SQLConstant.SELECT_ALL_PERSONNE)) {
                 while(res.next()) {
-                    personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"));
+                    personne = new Personne(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
                     personneList.add(personne);
                 }
             }
@@ -130,7 +132,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
     public static void main(String args[]) {
         System.out.println("On est dans le main de PersonneDAO");
         List<Personne> listPersonneTest;
-        Personne personneTest = new Personne("PersonneTestCreate","Toto","789@PersonneTest.com","0607080900",28031998);
+        Personne personneTest = new Personne("PersonneTestCreate","Toto","789@PersonneTest.com","0607080900",28031998,"pwd");
         Personne personneTest2;
         
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
@@ -147,7 +149,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
             System.out.println(personneTest2.getMail() + " " + personneTest2.getNom()+" "+personneTest2.getPrenom());
         }
         personneTest = personneDAO.findByMail(personneTest.getMail());
-        Personne personneTestUpdate = new Personne(personneTest.getId(),"PersonneTestUpdate","Bobby","789@PersonneTest.com","0699999999",28031998);
+        Personne personneTestUpdate = new Personne(personneTest.getId(),"PersonneTestUpdate","Bobby","789@PersonneTest.com","0699999999",28031998,"pwd");
         personneDAO.update(personneTestUpdate);
         personneDAO.delete(personneTest);
     }

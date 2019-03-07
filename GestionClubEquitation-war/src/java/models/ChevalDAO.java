@@ -178,7 +178,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         race = raceDAO.findByName(race.getNom());
         
-        Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998);
+        Personne proprietaire = new Personne("DUPONT", "Toto", "duponttoto@toto.com", "0607080900", 28031998,"pwd");
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
         proprietaire = personneDAO.findByMail(proprietaire.getMail());
         
