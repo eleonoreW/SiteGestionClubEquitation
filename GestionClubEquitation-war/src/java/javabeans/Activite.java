@@ -40,6 +40,54 @@ public class Activite {
         this.capacite = capacite;
         this.est_active = est_active;
     }
+
+    public int getActivite_id() {
+        return activite_id;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public Lieu getLieu() {
+        return lieu;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getCommentaire() {
+        return commentaire;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public float getDuree() {
+        return duree;
+    }
+
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public boolean getEst_active() {
+        return est_active;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
     
     
 }
