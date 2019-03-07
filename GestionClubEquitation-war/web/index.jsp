@@ -7,10 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <!------ HEAD ------->  
+    <%@ include file="jsp/template/Header.jsp"%>
+    <!------ /HEAD ------->  
+    
     <body>
       <h1>Hello World From Struts2</h1>
       <form action = "hello">
@@ -18,5 +18,11 @@
          <input type = "text" name = "name"/>
          <input type = "submit" value = "Say Hello"/>
       </form>
+      
+      
+    <!------ FOOTER ------->  
+    <%@ include file="jsp/template/Footer.jsp"%>
+    <!------ /FOOTER ------->   
+    
    </body>
 </html>
