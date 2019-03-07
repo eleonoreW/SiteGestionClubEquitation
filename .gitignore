@@ -52,3 +52,7 @@ nbdist/
 **/*genfiles.properties
 /nbproject/private/
 GestionClubEquitation-war/nbproject/project\.xml
+
+GestionClubEquitation-war/nbproject/
+
+nbproject/
