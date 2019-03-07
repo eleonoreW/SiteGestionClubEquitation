@@ -16,5 +16,9 @@ public class Professeur extends Employe{
     public int getNbHeureMaxSemaine() {
         return nbHeureMaxSemaine;
     }
+
+    public void setNbHeureMaxSemaine(int nbHeureMaxSemaine) {
+        this.nbHeureMaxSemaine = nbHeureMaxSemaine;
+    }
      
 }

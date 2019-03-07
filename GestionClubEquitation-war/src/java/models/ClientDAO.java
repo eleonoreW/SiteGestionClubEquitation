@@ -22,7 +22,7 @@ public class ClientDAO extends CommonDAO<Client>{
     public ArrayList<Client> findAll() {
         clientList = new ArrayList<>();
         try {
-                PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_PERSONNE_BY_SUBCLASS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+                PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CLIENT, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
                 
                 statement.setString(1, Client.class.getName());
                 

@@ -19,7 +19,7 @@ public class ProfesseurDAO extends EmployeDAO {
     }
     public Professeur create(Professeur object) {
         try {
-            PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_EMPLOYE);
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_PROFESSEUR);
             statement.setString(1, object.getPrenom());
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
@@ -38,7 +38,7 @@ public class ProfesseurDAO extends EmployeDAO {
     
     public boolean update(Professeur object) {
         try {
-            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_EMPLOYE);
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_PROFESSEUR);
             statement.setString(1, object.getPrenom());
             statement.setString(2, object.getNom());
             statement.setString(3, object.getMail());
