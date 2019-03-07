@@ -9,5 +9,5 @@ public class Professeur extends Personne{
     public Professeur(String nom, String prenom, String mail, String telephone, int date_naissance, int nbHeureMaxSemaine, String discriminator) {
         super(nom, prenom, mail, telephone, date_naissance, nbHeureMaxSemaine, discriminator);
     }
-    
+     
 }

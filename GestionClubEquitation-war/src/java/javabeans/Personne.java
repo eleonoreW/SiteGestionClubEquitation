@@ -9,7 +9,7 @@ public class Personne {
     private int date_naissance;
     private int nbHeureMaxSemaine;
     private String discriminator;
-    
+
     public Personne(int personne_id, String nom, String prenom, String mail, String telephone, int date_naissance, int nbHeureMaxSemaine, String discriminator){
         this.personne_id = personne_id;
         this.nom = nom;
