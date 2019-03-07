@@ -11,9 +11,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="">A propos</a>
-                </li>
                 <li>
                     <a class="nav-link" href="">Activités</a>
                 </li>

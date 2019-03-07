@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 6 mars 2019, 22:03:01
-    Author     : Mathieu HP
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
