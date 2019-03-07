@@ -56,3 +56,5 @@ GestionClubEquitation-war/nbproject/project\.xml
 GestionClubEquitation-war/nbproject/
 
 nbproject/
+
+*.properties

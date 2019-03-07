@@ -15,5 +15,11 @@
             <result name = "success">/jsp/HelloWorld.jsp</result>
         </action>
         
+        <action name="AddNewClientForm" 
+                class="actions.ClientAction" 
+                method="register"> 
+             <result name="success">/jsp/administrator/DisplayPersonneAdded.jsp</result> 
+         </action> 
+        
     </package>
 </struts>
