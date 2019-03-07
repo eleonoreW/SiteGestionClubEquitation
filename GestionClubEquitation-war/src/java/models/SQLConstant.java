@@ -53,9 +53,9 @@ public class SQLConstant {
     // RESERVATION
     public static final String SELECT_ALL_RESERVATION = "SELECT * FROM Reservation";
     public static final String SELECT_ALL_RESERVATION_BY_ID = "SELECT * FROM Reservation WHERE ID=?";
-    public static final String SELECT_ALL_RESERVATION_BY_NAME = "SELECT * FROM Reservation WHERE Nom=?";
+    public static final String SELECT_ALL_RESERVATION_BY_DATE_PERSONNE_ACTIVITE = "SELECT * FROM Reservation WHERE Date=? AND PersonneID=? AND ActiviteID=?";
     public static final String INSERT_RESERVATION = "INSERT INTO Reservation (ID, Date, NbPersonne, EstActive,PersonneID, ActiviteID) VALUES (DEFAULT, ?,?,?,?,?)";
-    public static final String UPDATE_RESERVATION = "UPDATE Reservation SET Nom = ? WHERE ID = ?";
+    public static final String UPDATE_RESERVATION = "UPDATE Reservation SET Date = ?, NbPersonne = ?, EstActive = ?, PersonneID = ?, ActiviteID = ? WHERE ID = ?";
     public static final String DELETE_RESERVATION = "DELETE FROM Reservation WHERE ID = ?";
     
     // ACTIVITE
@@ -63,6 +63,6 @@ public class SQLConstant {
     public static final String SELECT_ALL_ACTIVITE_BY_ID = "SELECT * FROM Activite WHERE ID=?";
     public static final String SELECT_ALL_ACTIVITE_BY_NAME = "SELECT * FROM Activite WHERE Nom=?";
     public static final String INSERT_ACTIVITE = "INSERT INTO Activite (ID, PersonneID, LieuID, TypeID, Nom, Commentaire, Details, Date, Duree, Capacite, EstActive) VALUES (DEFAULT, ?,?,?,?,?,?,?,?,?,?)";
-    public static final String UPDATE_ACTIVITE = "UPDATE Activite SET Nom = ? WHERE ID = ?";
+    public static final String UPDATE_ACTIVITE = "UPDATE Activite SET PersonneID = ?, LieuID = ?, TypeID = ?, Nom = ?, Commentaire = ?, Details = ?, Date = ?, Duree = ?, Capacite = ?, EstActive = ? WHERE ID = ?";
     public static final String DELETE_ACTIVITE = "DELETE FROM Activite WHERE ID = ?";
 }

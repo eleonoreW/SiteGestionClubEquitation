@@ -190,14 +190,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
                    chevalDAO.create(cheval);
                    cheval = chevalDAO.findByName(cheval.getNom());
                    //chevalDAO.delete(cheval);
-      
-                   Cheval chevalUpdate = new Cheval(cheval.getRace(), cheval.getProprietaire(), "Bouteille", "241096", "descriptionducheval", "commentairecheval", 10, 175);
                    cheval.setDescription(("autre description du super cheval"));
-                   chevalUpdate = chevalDAO.findByName(cheval.getNom());
-                   
-          
-                   
-                   
                    chevalDAO.update(cheval);
                 }
                 
