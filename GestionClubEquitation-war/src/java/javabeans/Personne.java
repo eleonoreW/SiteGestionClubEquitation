@@ -1,7 +1,7 @@
 package javabeans;
 
 public class Personne {
-    private int personne_id;
+    private int id;
     private String nom;
     private String prenom;
     private String mail;
@@ -11,7 +11,7 @@ public class Personne {
     public Personne(){}
     
     public Personne(int personne_id, String nom, String prenom, String mail, String telephone, int date_naissance){
-        this.personne_id = personne_id;
+        this.id = personne_id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
@@ -20,7 +20,7 @@ public class Personne {
     }
     
     public Personne(String nom, String prenom, String mail, String telephone, int date_naissance){
-        this.personne_id = -1;
+        this.id = -1;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
@@ -29,8 +29,8 @@ public class Personne {
         this.date_naissance = date_naissance;
     }
     
-    public int getPersonne_id() {
-        return personne_id;
+    public int getId() {
+        return id;
     }
 
     public String getNom() {
@@ -53,8 +53,8 @@ public class Personne {
         return date_naissance;
     }
 
-    public void setPersonne_id(int personne_id) {
-        this.personne_id = personne_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNom(String nom) {

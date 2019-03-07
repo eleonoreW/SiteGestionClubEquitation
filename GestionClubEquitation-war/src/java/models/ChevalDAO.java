@@ -28,7 +28,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.INSERT_CHEVAL);
 
             statement.setInt(1, object.getRace().getRace_id());
-            statement.setInt(2, object.getProprietaire().getPersonne_id());
+            statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
             statement.setString(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
@@ -68,7 +68,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_CHEVAL);
             
             statement.setInt(1, object.getRace().getRace_id());
-            statement.setInt(2, object.getProprietaire().getPersonne_id());
+            statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
             statement.setString(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());

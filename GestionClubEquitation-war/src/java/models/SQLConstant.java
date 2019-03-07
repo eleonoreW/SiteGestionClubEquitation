@@ -61,22 +61,22 @@ public class SQLConstant {
     public static final String UPDATE_PERSONNE = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_PERSONNE = "DELETE FROM Personne WHERE ID = ?";
     
-    // ADMIN
-    public static final String SELECT_ALL_ADMIN = "SELECT * FROM Personne WHERE Discriminator = ?";
-    public static final String SELECT_ALL_ADMIN_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
-    public static final String SELECT_ALL_ADMIN_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
-    public static final String SELECT_ADMIN_BY_ID = "SELECT * FROM Personne WHERE ID=?";
-    public static final String INSERT_ADMIN = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?)";
-    public static final String UPDATE_ADMIN = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
-    public static final String DELETE_ADMIN = "DELETE FROM Personne WHERE ID = ?";
+    // ADMINISTRATEUR
+    public static final String SELECT_ALL_ADMINISTRATEUR = "SELECT * FROM Personne WHERE Discriminator = ?";
+    public static final String SELECT_ALL_ADMINISTRATEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
+    public static final String SELECT_ALL_ADMINISTRATEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
+    public static final String SELECT_ADMINISTRATEUR_BY_ID = "SELECT * FROM Personne WHERE ID=?";
+    public static final String INSERT_ADMINISTRATEUR = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?)";
+    public static final String UPDATE_ADMINISTRATEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
+    public static final String DELETE_ADMINISTRATEUR = "DELETE FROM Personne WHERE ID = ?";
     
     // PROFESSEUR
     public static final String SELECT_ALL_PROFESSEUR = "SELECT * FROM Personne WHERE Discriminator = ?";
     public static final String SELECT_ALL_PROFESSEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
     public static final String SELECT_ALL_PROFESSEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
     public static final String SELECT_PROFESSEUR_BY_ID = "SELECT * FROM Personne WHERE ID=?";
-    public static final String INSERT_PROFESSEUR = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?)";
-    public static final String UPDATE_PROFESSEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?,Discriminator = ? WHERE ID = ?";
+    public static final String INSERT_PROFESSEUR = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,NbHeureActiviteMaxSemaine,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
+    public static final String UPDATE_PROFESSEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?, NbHeureActiviteMaxSemaine = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_PROFESSEUR = "DELETE FROM Personne WHERE ID = ?";
     
     // CLIENT

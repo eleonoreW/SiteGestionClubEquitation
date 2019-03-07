@@ -41,7 +41,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
     public boolean delete(Personne object) {
         try {
             try (PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_PERSONNE)) {
-                statement.setString(1, Integer.toString(object.getPersonne_id()));
+                statement.setString(1, Integer.toString(object.getId()));
                 statement.executeUpdate();
             }
         } catch(SQLException e) {
@@ -61,7 +61,7 @@ public class PersonneDAO extends CommonDAO<Personne>{
             statement.setString(4, object.getTelephone());
             statement.setString(5, Integer.toString(object.getDate_naissance()));
             statement.setString(6, object.getClass().getName());
-            statement.setString(7, Integer.toString(object.getPersonne_id()));
+            statement.setString(7, Integer.toString(object.getId()));
             statement.executeUpdate();
             statement.close();
         } catch(SQLException e) {
@@ -130,15 +130,15 @@ public class PersonneDAO extends CommonDAO<Personne>{
     public static void main(String args[]) {
         System.out.println("On est dans le main de PersonneDAO");
         List<Personne> listPersonneTest;
-        Personne personneTest = new Personne("DUPONT","Toto","789@toto.com","0607080900",28031998);
+        Personne personneTest = new Personne("PersonneTestCreate","Toto","789@PersonneTest.com","0607080900",28031998);
         Personne personneTest2;
         
-        PersonneDAO typeDAO = new PersonneDAO(ConnectionDB.getInstance());
-        if(typeDAO.findByMail(personneTest.getMail()) == null) {
-            typeDAO.create(personneTest);
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        if(personneDAO.findByMail(personneTest.getMail()) == null) {
+            personneDAO.create(personneTest);
         } 
         
-        listPersonneTest = typeDAO.findAll();
+        listPersonneTest = personneDAO.findAll();
         
         Iterator<Personne> it = listPersonneTest.iterator();
         
@@ -146,9 +146,9 @@ public class PersonneDAO extends CommonDAO<Personne>{
             personneTest2 = (Personne)it.next();
             System.out.println(personneTest2.getMail() + " " + personneTest2.getNom()+" "+personneTest2.getPrenom());
         }
-        personneTest = typeDAO.findByMail(personneTest.getMail());
-        Personne personneTestUpdate = new Personne(personneTest.getPersonne_id(),"DUPONT","Bobby","789@toto.com","0699999999",28031998);
-        typeDAO.update(personneTestUpdate);
-        typeDAO.delete(personneTest);
+        personneTest = personneDAO.findByMail(personneTest.getMail());
+        Personne personneTestUpdate = new Personne(personneTest.getId(),"PersonneTestUpdate","Bobby","789@PersonneTest.com","0699999999",28031998);
+        personneDAO.update(personneTestUpdate);
+        personneDAO.delete(personneTest);
     }
 }
