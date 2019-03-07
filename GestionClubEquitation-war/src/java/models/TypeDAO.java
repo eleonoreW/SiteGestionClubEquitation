@@ -75,7 +75,7 @@ public class TypeDAO extends CommonDAO<Type> {
     public Type findById(int id) {
         type = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_RACE_BY_ID);
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_TYPE_BY_ID);
             
             statement.setInt(1, id);
             
