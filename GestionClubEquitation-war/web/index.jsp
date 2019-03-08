@@ -17,7 +17,7 @@
         <!------ /MENU ------>
         
       <h1>Hello World From Struts2</h1>
-      <form action = "hello">
+      <form action = "addActivite">
          <label for = "name">Please enter your name</label><br/>
          <input type = "text" name = "name"/>
          <input type = "submit" value = "Say Hello"/>

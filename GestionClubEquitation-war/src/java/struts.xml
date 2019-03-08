@@ -15,5 +15,11 @@
             <result name = "success">/jsp/HelloWorld.jsp</result>
         </action>
         
+        <action name = "addActivite"
+            class = "actions.AddActiviteAction"
+            method= "prepare">
+            <result name = "success">/jsp/creationActivite.jsp</result>
+        </action>
+        
     </package>
 </struts>
