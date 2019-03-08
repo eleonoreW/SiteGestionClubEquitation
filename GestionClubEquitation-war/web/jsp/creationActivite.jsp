@@ -13,25 +13,26 @@
         
         <div class="container" style="margin-top: 100px;">
             <h1>Creation activité</h1>
-            <s:form action="AddNewActivite" >		
-                <s:textfield name="activite_nom" id="activite_nom"
+            <s:form action="creationActivite" >		
+                <s:textfield name="nom" id="activite_nom"
                         label="Nom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>
-                <s:textfield name="activite_details" id="activite_details"
+                <s:textfield name="details" id="activite_details"
                              label="Details" labelpostion="left">
                 </s:textfield> 
-
+                
+                <s:textfield type="number" name="date" label="Date" labelposition="left" required="required" 
+                             placeholder="13012019">
+                </s:textfield> 
                 
                 <s:select label="Durée (h)"
-                    name="activite_duree"
+                    name="duree"
                     headerKey="-1" headerValue="1"
                     list="{2, 3, 4, 5, 6, 7, 8}"
                     value="selectedDuree"
                     required="true" />
                 
-                
-                
-                <s:textfield name="activite_capacite" id="activite_capacite"
+                <s:textfield name="capacite" id="activite_capacite"
                         label="Capacité" labelposition="left">
                 </s:textfield>
                 
@@ -43,7 +44,7 @@
                 
                 <s:select label="Prof" 
                     headerKey="-1" headerValue="Selectionner prof"
-                    list="listProf.{nom}" 
+                    list="listProf.{mail}" 
                     name="profSelected"/>
 
                 <s:select label="Type" 
@@ -57,7 +58,7 @@
                     list="listCheval.{nom}"
                     name="listChevalSelected"/>
                 
-                <s:submit value = "Register" align="center"></s:submit>
+                <s:submit value = "submit" align="center"></s:submit>
             </s:form>
         </div>
       

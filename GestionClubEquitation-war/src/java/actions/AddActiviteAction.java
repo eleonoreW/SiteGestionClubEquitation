@@ -1,26 +1,37 @@
 package actions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javabeans.Cheval;
 import javabeans.Lieu;
 import javabeans.Professeur;
 import javabeans.Type;
+import javabeans.Activite;
 import javax.servlet.http.HttpServletRequest;
+import models.ActiviteDAO;
+import models.ChevalDAO;
 import models.ConnectionDB;
 import models.LieuDAO;
 import models.ProfesseurDAO;
+import models.TypeDAO;
 import org.apache.struts2.ServletActionContext;
 
 
 public class AddActiviteAction {
     
+    private Activite activite;
+    private ActiviteDAO activiteDAO;
+    public List<Activite> listActivite;
+    
     private String nom;
     private String commentaire = "";
     private String details;
-    private int date;
-    private int duree;
-    private int capacite;
+    private String date;
+    
+    private String duree;
+    private String capacite;
     private boolean estActive = true;
     
     private List<Professeur> listProf;
@@ -28,23 +39,53 @@ public class AddActiviteAction {
     private List<Type> listType;
     private List<Cheval> listCheval;
     
-    private String[] listStr = new String[1];
+    private String profSelected;
+    private String lieuSelected;
+    private String typeSelected;
+    private List<String> listChevalSelected = new ArrayList<>();
     
-    private Professeur profSelected;
-    private Lieu lieuSelected;
-    private Type typeSelected;
-    private List<Cheval> listChevalSelected = new ArrayList<>();
-//    private String str;
-    
-//    private List<String> colors;
     
     public String execute() {
         
         HttpServletRequest req = ServletActionContext.getRequest();
         
-        // TODO
+        ProfesseurDAO professeurDAO = new ProfesseurDAO(ConnectionDB.getInstance());
+        Professeur prof = professeurDAO.findByMail(profSelected);
         
-        return "success";
+        TypeDAO typeDAO = new TypeDAO(ConnectionDB.getInstance());
+        Type type = typeDAO.findByName(typeSelected);
+        
+        LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
+        Lieu lieu = lieuDAO.findByName(lieuSelected);
+        
+        
+        
+//        setNom(req.getParameter("activite_nom"));
+//        setDetails(req.getParameter("activite_details"));
+//        setDate(Integer.parseInt(req.getParameter("date")));
+//        setDuree(Integer.parseInt(req.getParameter("activite_duree")));
+//        setCapacite(Integer.parseInt(req.getParameter("activite_capacite")));
+       
+        
+        activite = new Activite(prof, lieu, type, nom, commentaire, details, Integer.parseInt(date), Integer.parseInt(duree), Integer.parseInt(capacite), estActive);
+        
+        setActivite(activite);
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+        
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        
+        List<Cheval> listChevaux = new ArrayList<>();
+        for(String s : listChevalSelected) {
+            listChevaux.add(chevalDAO.findByName(s));
+        }
+        
+        activiteDAO.create(activite, listChevaux);
+        
+        if(getActivite()!=null){
+            return "success";
+        }else{
+            return "error";
+        }  
     }
     
     public String prepare(){
@@ -54,10 +95,38 @@ public class AddActiviteAction {
         ProfesseurDAO profDAO = new ProfesseurDAO(ConnectionDB.getInstance());
         listProf = profDAO.findAll();
         
+        TypeDAO typeDAO = new TypeDAO(ConnectionDB.getInstance());
+        listType = typeDAO.findAll();
         
-
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        listCheval = chevalDAO.findAll();
         
         return "success";
+    }
+
+    //Getter et setter
+    public Activite getActivite() {
+        return activite;
+    }
+
+    public void setActivite(Activite activite) {
+        this.activite = activite;
+    }
+
+    public ActiviteDAO getActiviteDAO() {
+        return activiteDAO;
+    }
+
+    public void setActiviteDAO(ActiviteDAO activiteDAO) {
+        this.activiteDAO = activiteDAO;
+    }
+
+    public List<Activite> getListActivite() {
+        return listActivite;
+    }
+
+    public void setListActivite(List<Activite> listActivite) {
+        this.listActivite = listActivite;
     }
 
     public String getNom() {
@@ -84,27 +153,27 @@ public class AddActiviteAction {
         this.details = details;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public int getDuree() {
+    public String getDuree() {
         return duree;
     }
 
-    public void setDuree(int duree) {
+    public void setDuree(String duree) {
         this.duree = duree;
     }
 
-    public int getCapacite() {
+    public String getCapacite() {
         return capacite;
     }
 
-    public void setCapacite(int capacite) {
+    public void setCapacite(String capacite) {
         this.capacite = capacite;
     }
 
@@ -148,44 +217,35 @@ public class AddActiviteAction {
         this.listCheval = listCheval;
     }
 
-    public String[] getListStr() {
-        return listStr;
-    }
-
-    public void setListStr(String[] listStr) {
-        this.listStr = listStr;
-    }
-
-    public Professeur getProfSelected() {
+    public String getProfSelected() {
         return profSelected;
     }
 
-    public void setProfSelected(Professeur profSelected) {
+    public void setProfSelected(String profSelected) {
         this.profSelected = profSelected;
     }
 
-    public Lieu getLieuSelected() {
+    public String getLieuSelected() {
         return lieuSelected;
     }
 
-    public void setLieuSelected(Lieu lieuSelected) {
+    public void setLieuSelected(String lieuSelected) {
         this.lieuSelected = lieuSelected;
     }
 
-    public Type getTypeSelected() {
+    public String getTypeSelected() {
         return typeSelected;
     }
 
-    public void setTypeSelected(Type typeSelected) {
+    public void setTypeSelected(String typeSelected) {
         this.typeSelected = typeSelected;
     }
 
-    public List<Cheval> getListChevalSelected() {
+    public List<String> getListChevalSelected() {
         return listChevalSelected;
     }
 
-    public void setListChevalSelected(List<Cheval> listChevalSelected) {
+    public void setListChevalSelected(List<String> listChevalSelected) {
         this.listChevalSelected = listChevalSelected;
     }
-    
 }
