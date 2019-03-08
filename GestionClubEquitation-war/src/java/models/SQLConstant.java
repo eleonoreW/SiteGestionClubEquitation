@@ -18,6 +18,15 @@ public class SQLConstant {
     public static final String INSERT_CHEVAL = "INSERT INTO Cheval(ID, RaceID,PersonneID, Nom, DateNaissance,Description,Commentaire,NbHeureMaxSemaine,Taille) VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_CHEVAL = "UPDATE Cheval SET RaceID = ?, PersonneID = ?, Nom = ?, DateNaissance = ?, Description = ?, Commentaire = ?, NbHeureMaxSemaine = ?, Taille = ?  WHERE ID = ?";
     public static final String DELETE_CHEVAL = "DELETE FROM Cheval WHERE ID = ?";
+    public static final String WITH_NAME_LIKE = " Nom LIKE ";
+    public static final String WITH_RACEID = " RaceID = ";
+    public static final String WITH_PROPRITAIREID = " PersonneID = ";
+    public static final String WITH_DATENAISSANCE_GEQ = " DateNaissance >= ";
+    public static final String WITH_DATENAISSANCE_LEQ = " DateNaissance <= ";
+    public static final String WITH_DATENAISSANCE_EQ  = " DateNaissance = ";
+    public static final String WITH_TAILLE_GEQ = " TAILLE >= ";
+    public static final String WITH_TAILLE_LEQ = " TAILLE <= ";
+    public static final String WITH_TAILLE_EQ  = " TAILLE = ";
     
     // TYPE
     public static final String SELECT_ALL_TYPE = "SELECT * FROM Type";
