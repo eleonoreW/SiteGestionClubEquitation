@@ -24,8 +24,9 @@ public class AdminAction {
            
     private AdministrateurDAO administrateurDAO;
  
-    public List<Administrateur> AdministrationList;
+    public List<Administrateur> listAll;
     
+    private int id;
     private String nom;
     private String prenom;
     private String mail;
@@ -36,14 +37,14 @@ public class AdminAction {
      public String register() throws Exception {   
         
         HttpServletRequest req = ServletActionContext.getRequest();
-        setNom(req.getParameter("admin_prenom"));
+        setNom(req.getParameter("admin_nom"));
         setPrenom(req.getParameter("admin_prenom"));
         setMail(req.getParameter("admin_mail"));
         setTelephone(req.getParameter("admin_tel"));
         setDate_naissance(Integer.parseInt(req.getParameter("admin_datenaissance")));
         
 
-        administrateur =  new Administrateur(nom, prenom, mail, telephone, date_naissance);
+        administrateur =  new Administrateur(nom, prenom, mail, telephone, date_naissance,"bli");
              
         setAdministrateur(administrateur);
         administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());
@@ -56,7 +57,68 @@ public class AdminAction {
          }
     }
      
+    public String displayAll(){
+        administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());                    
+        listAll = administrateurDAO.findAll();
+        
+        return "success";
+    }
      
+     
+    public String loadAdmin(){
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());                    
+        administrateur = administrateurDAO.findByMail(req.getParameter("mail"));
+        
+        setId(administrateur.getId());
+        setNom(administrateur.getNom());
+        setPrenom(administrateur.getPrenom());
+        setMail(administrateur.getMail());
+        setTelephone(administrateur.getTelephone());
+        setDate_naissance(administrateur.getDate_naissance());
+        
+        return "success";
+    }
+    
+    public String replaceAdmin() throws Exception {   
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        setId(Integer.parseInt(req.getParameter("id")));
+        setNom(req.getParameter("admin_nom"));
+        setPrenom(req.getParameter("admin_prenom"));
+        setMail(req.getParameter("admin_mail"));
+        setTelephone(req.getParameter("admin_tel"));
+        setDate_naissance(Integer.parseInt(req.getParameter("admin_datenaissance")));
+        
+
+        administrateur =  new Administrateur(id,nom, prenom, mail, telephone, date_naissance,"bli");
+             
+        setAdministrateur(administrateur);
+        administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());
+        administrateurDAO.update(administrateur);
+        if(getAdministrateur()!= null){
+            return "success";
+        }else{
+            return "error";
+         }
+    }
+    
+    public String deleteAdmin() throws Exception {   
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        setId(Integer.parseInt(req.getParameter("id")));
+       
+        administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());
+        administrateur = administrateurDAO.findById(id);
+        administrateurDAO.delete(administrateur);
+        if(getAdministrateur()!= null){
+            return "success";
+        }else{
+            return "error";
+         }
+    }
+    
     public Administrateur getAdministrateur() {
         return administrateur;
     }
@@ -65,6 +127,14 @@ public class AdminAction {
         this.administrateur = administrateur;
     }
 
+       public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getNom() {
         return nom;
     }
