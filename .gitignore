@@ -58,5 +58,7 @@ GestionClubEquitation-war/nbproject/
 
 nbproject/
 
+*.properties
+
 *.lck
 *.bak_*

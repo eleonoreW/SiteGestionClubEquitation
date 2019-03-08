@@ -9,11 +9,41 @@
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">  
         
-        <action name = "hello" 
-            class = "actions.HelloWorldAction" 
-            method = "execute">
-            <result name = "success">/jsp/HelloWorld.jsp</result>
+        <action name="hello" 
+            class="actions.HelloWorldAction" 
+            method="execute">
+            <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result>
         </action>
+        
+        <action name="AddNewAdminForm" 
+                class="actions.AdminAction" 
+                method="register"> 
+             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+         </action> 
+         
+         <action name="AfficheAllAdministrateurs" 
+                class="actions.AdminAction" 
+                method="displayAll"> 
+             <result name="success">/jsp/administrateur/AfficheAllAdmin.jsp</result> 
+         </action> 
+         
+         <action name="LoadAdmin" 
+                class="actions.AdminAction" 
+                method="loadAdmin"> 
+             <result name="success">/jsp/administrateur/ModifieAdmin.jsp</result> 
+         </action> 
+         
+         <action name="ReplaceAdmin" 
+                class="actions.AdminAction" 
+                method="replaceAdmin"> 
+             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+         </action> 
+         
+         <action name="DeleteAdmin" 
+                class="actions.AdminAction" 
+                method="deleteAdmin"> 
+             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+         </action> 
         
     </package>
 </struts>
