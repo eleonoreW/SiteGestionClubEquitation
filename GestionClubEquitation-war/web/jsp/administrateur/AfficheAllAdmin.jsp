@@ -1,8 +1,3 @@
-<%-- 
-    Document   : ListerBookByAuthor
-    Created on : 12 juin 2017, 14:09:37
-    Author     : cdavezac
---%>
 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 

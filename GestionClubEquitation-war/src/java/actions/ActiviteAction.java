@@ -20,6 +20,9 @@ import org.apache.struts2.ServletActionContext;
 public class ActiviteAction {
     
     private Activite activite;
+    private int nbPlaceDispo = 0;
+    
+    
     private ActiviteDAO activiteDAO;
     public List<Activite> listActivite;
     
@@ -98,6 +101,26 @@ public class ActiviteAction {
         
         ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
         listCheval = chevalDAO.findAll();
+        
+        return "success";
+    }
+    
+    public String displayAllFuturDateNotCanceled() {
+        ActiviteDAO activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+        listActivite = activiteDAO.findAll();
+        
+        return "success";
+    }
+    
+    public String loadActiviteClient() {
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());                    
+        activite = activiteDAO.findById(Integer.parseInt(req.getParameter("activite_id")));
+        
+        
+        // calcul du nombre de palces dispo
+        nbPlaceDispo = activiteDAO.getNbPlaceDispo(activite.getActivite_id());
         
         return "success";
     }

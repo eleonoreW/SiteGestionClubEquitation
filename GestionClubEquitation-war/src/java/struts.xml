@@ -70,5 +70,13 @@
             method= "execute">
             <result name = "success">index.jsp</result>
         </action>
+        
+        
+        <action name="LoadActiviteClient"
+            class="action.ActiviteAction"
+            methode="loadActiviteClient">
+            <result name="success">/jsp/activite/AfficheActiviteClient.jsp</result>
+        </action>
+        
     </package>
 </struts>

@@ -22,7 +22,7 @@
                 </s:textfield> 
                 
                 <s:textfield type="number" name="date" label="Date" labelposition="left" required="required" 
-                             placeholder="13012019">
+                             placeholder="20190113">
                 </s:textfield> 
                 
                 <s:select label="Durée (h)"

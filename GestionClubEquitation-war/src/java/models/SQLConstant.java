@@ -57,9 +57,11 @@ public class SQLConstant {
     public static final String SELECT_ALL_ACTIVITE_BY_ID = "SELECT * FROM Activite WHERE ID=?";
     public static final String SELECT_ALL_ACTIVITE_BY_NAME = "SELECT * FROM Activite WHERE Nom=?";
     public static final String SELECT_ALL_ACTIVITE_BY_NAME_DATE = "SELECT * FROM Activite WHERE Nom=? AND Date = ?";
+    public static final String SELECT_ALL_ACTIVITE_FUTUR_DATE_NOT_CANCELED = "SELECT * FROM Activite WHERE Date > ? AND EstActive = true";
     public static final String INSERT_ACTIVITE = "INSERT INTO Activite (ID, PersonneID, LieuID, TypeID, Nom, Commentaire, Details, Date, Duree, Capacite, EstActive) VALUES (DEFAULT, ?,?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_ACTIVITE = "UPDATE Activite SET PersonneID = ?, LieuID = ?, TypeID = ?, Nom = ?, Commentaire = ?, Details = ?, Date = ?, Duree = ?, Capacite = ?, EstActive = ? WHERE ID = ?";
     public static final String DELETE_ACTIVITE = "DELETE FROM Activite WHERE ID = ?";
+    public static final String SUM_PLACE_DISPO = "SELECT SUM(NbPersonne) as Count FROM Reservation WHERE ActiviteID = ?";
     
     public static final String ADD_CHEVAL_ACTIVITE = "INSERT INTO Cheval_Activite (ChevalID, ActiviteID) VALUES (?,?)";
     public static final String DELETE_CHEVAL_ACTIVITE = "DELETE FROM Cheval_Activite WHERE ActiviteID = ?";
