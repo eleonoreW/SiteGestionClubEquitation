@@ -62,5 +62,10 @@
              <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
          </action> 
         
+        <action name="searchCheval" 
+                class="actions.SearchChevalAction" 
+                method="prepare"> 
+             <result name="success">/jsp/searchCheval.jsp</result> 
+         </action> 
     </package>
 </struts>

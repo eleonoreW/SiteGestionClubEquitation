@@ -39,16 +39,6 @@ public class SearchChevalAction {
         
         HttpServletRequest req = ServletActionContext.getRequest();
         
-        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
-        
-        // On recupere la race
-        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
-        Race queryRace = raceDAO.findByName(raceSelected);
-        
-        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
-        queryProprietaire = personneDAO.findByMail(proprietaireSelected);
-        // On récupere la liste de chevaux avec les paramètres de recherche
-        listChevalResult = chevalDAO.filterBy(nom, queryRace, queryProprietaire, Integer.parseInt(dateNaissanceMin), Integer.parseInt(dateNaissanceMax), Integer.parseInt(tailleMin), Integer.parseInt(tailleMax));
         
         return "success";
     }
@@ -59,6 +49,16 @@ public class SearchChevalAction {
         
         PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
         listProprietaire = personneDAO.findAll();
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        
+        // On recupere la race
+        Race queryRace = raceDAO.findByName(raceSelected);
+        queryProprietaire = personneDAO.findByMail(proprietaireSelected);
+        // On récupere la liste de chevaux avec les paramètres de recherche
+        listChevalResult = chevalDAO.filterBy(nom, queryRace, queryProprietaire, Integer.parseInt(dateNaissanceMin), Integer.parseInt(dateNaissanceMax), Integer.parseInt(tailleMin), Integer.parseInt(tailleMax));
         
         return "success";
     }
