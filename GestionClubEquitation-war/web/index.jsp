@@ -23,6 +23,7 @@
          <input type = "submit" value = "Say Hello"/>
       </form>
       coucou
+      coucou
       
     <!------ FOOTER ------->  
     <%@ include file="jsp/template/Footer.jsp"%>
