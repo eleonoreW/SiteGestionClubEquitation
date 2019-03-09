@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javabeans.Administrateur;
 
 
@@ -131,6 +133,33 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
         return adminList;
     }
     
+   
+    public boolean validate(String mail, String password) {
+        
+        boolean status = false;
+        
+         try{
+
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ADMINISTRATEUR_BY_MAIL_AND_PWD);
+            
+            statement.setString(1, mail);
+            statement.setString(2, password);
+
+            ResultSet res = statement.executeQuery();     
+                
+            if (res.next()){   
+                    admin = new Administrateur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
+                    if ( admin.getMail().equals(mail) && admin.getPassword().equals(password) ){
+                       status = true;
+                    }            
+            }            
+        }catch (SQLException e) {
+            e.printStackTrace();
+           
+        }        
+        return status;    
+    }
+    
     
     public static void main(String args[]) {
         System.out.println("On est dans le main de AdministrateurDAO");
@@ -154,6 +183,6 @@ public class AdministrateurDAO extends CommonDAO<Administrateur>{
         adminTest = adminDAO.findByMail(adminTest.getMail());
         Administrateur adminTestUpdate = new Administrateur(adminTest.getId(),"AdministrateurTestUpdate","Bobby","789@AdministrateurTest.com","0699999999",28031998,"pwd");
         adminDAO.update(adminTestUpdate);
-        adminDAO.delete(adminTest);
+        adminDAO.findByMail(adminTest.getMail());
     }
 }

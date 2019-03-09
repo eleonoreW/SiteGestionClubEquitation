@@ -131,6 +131,32 @@ public class ProfesseurDAO extends CommonDAO<Professeur> {
         return prof;
 }
     
+    public boolean validate(String mail, String password) {
+        
+        boolean status = false;
+        
+         try{
+
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_PROFESSEUR_BY_MAIL_AND_PWD);
+            
+            statement.setString(1, mail);
+            statement.setString(2, password);
+
+            ResultSet res = statement.executeQuery();     
+                
+            if (res.next()){   
+                    prof = new Professeur(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"), res.getInt("NbHeureActiviteMaxSemaine"));
+                    if ( prof.getMail().equals(mail) && prof.getPassword().equals(password) ){
+                       status = true;
+                    }            
+            }            
+        }catch (SQLException e) {
+            e.printStackTrace();
+           
+        }        
+        return status;    
+    }
+    
     public static void main(String args[]) {
         System.out.println("On est dans le main de PersonneDAO");
         List<Professeur> listProfesseurTest;

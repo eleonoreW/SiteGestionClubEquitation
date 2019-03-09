@@ -131,6 +131,32 @@ public class ClientDAO extends CommonDAO<Client>{
         return clientList;
     }
     
+    public boolean validate(String mail, String password) {
+        
+        boolean status = false;
+        
+         try{
+
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_CLIENT_BY_MAIL_AND_PWD);
+            
+            statement.setString(1, mail);
+            statement.setString(2, password);
+
+            ResultSet res = statement.executeQuery();     
+                
+            if (res.next()){   
+                    client = new Client(res.getInt("ID"), res.getString("Prenom"), res.getString("Nom"),res.getString("Mail"),res.getString("Telephone"),res.getInt("DateNaissance"), res.getString("Password"));
+                    if ( client.getMail().equals(mail) && client.getPassword().equals(password) ){
+                       status = true;
+                    }            
+            }            
+        }catch (SQLException e) {
+            e.printStackTrace();
+           
+        }        
+        return status;    
+    }
+    
     
     public static void main(String args[]) {
         System.out.println("On est dans le main de ClientDAO");
