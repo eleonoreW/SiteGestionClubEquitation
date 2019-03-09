@@ -40,7 +40,7 @@
                             <a class="nav-link" href="">Activités</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="">Chevaux</a>
+                            <a class="nav-link" href="gotoCheval">Chevaux</a>
                         </li>
                         <li>
                             <a class="nav-link" href="connection.jsp">Se déconnecter</a>

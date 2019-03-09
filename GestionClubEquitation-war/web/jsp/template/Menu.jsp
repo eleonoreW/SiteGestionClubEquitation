@@ -11,6 +11,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                
                 <li class="nav-item">
                     <a class="nav-link" href="">A propos</a>
                 </li>
@@ -18,10 +19,10 @@
                     <a class="nav-link" href="">Activités</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Chevaux</a>
+                    <a class="nav-link" href="gotoChevalSearch">Chevaux</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="connection.jsp">Se connecter</a>
+                    <a class="nav-link" href="gotoConnexion">Se connecter</a>
                 </li>
             </ul>
         </div>

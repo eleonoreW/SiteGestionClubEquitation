@@ -18,6 +18,15 @@ public class SQLConstant {
     public static final String INSERT_CHEVAL = "INSERT INTO Cheval(ID, RaceID,PersonneID, Nom, DateNaissance,Description,Commentaire,NbHeureMaxSemaine,Taille) VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_CHEVAL = "UPDATE Cheval SET RaceID = ?, PersonneID = ?, Nom = ?, DateNaissance = ?, Description = ?, Commentaire = ?, NbHeureMaxSemaine = ?, Taille = ?  WHERE ID = ?";
     public static final String DELETE_CHEVAL = "DELETE FROM Cheval WHERE ID = ?";
+    public static final String WITH_NAME_LIKE = " Nom LIKE ";
+    public static final String WITH_RACEID = " RaceID = ";
+    public static final String WITH_PROPRITAIREID = " PersonneID = ";
+    public static final String WITH_DATENAISSANCE_GEQ = " DateNaissance >= ";
+    public static final String WITH_DATENAISSANCE_LEQ = " DateNaissance <= ";
+    public static final String WITH_DATENAISSANCE_EQ  = " DateNaissance = ";
+    public static final String WITH_TAILLE_GEQ = " TAILLE >= ";
+    public static final String WITH_TAILLE_LEQ = " TAILLE <= ";
+    public static final String WITH_TAILLE_EQ  = " TAILLE = ";
     
     // TYPE
     public static final String SELECT_ALL_TYPE = "SELECT * FROM Type";
@@ -63,27 +72,30 @@ public class SQLConstant {
     
     // ADMINISTRATEUR
     public static final String SELECT_ALL_ADMINISTRATEUR = "SELECT * FROM Personne WHERE Discriminator = ?";
-    public static final String SELECT_ALL_ADMINISTRATEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
-    public static final String SELECT_ALL_ADMINISTRATEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
-    public static final String SELECT_ADMINISTRATEUR_BY_ID = "SELECT * FROM Personne WHERE ID=?";
+    public static final String SELECT_ALL_ADMINISTRATEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=? AND Discriminator LIKE '%Administrateur'";
+    public static final String SELECT_ALL_ADMINISTRATEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=? AND Discriminator LIKE '%Administrateur'";
+    public static final String SELECT_ADMINISTRATEUR_BY_ID = "SELECT * FROM Personne WHERE ID=? AND Discriminator LIKE '%Administrateur'";
+    public static final String SELECT_ADMINISTRATEUR_BY_MAIL_AND_PWD = "SELECT * FROM Personne WHERE Mail=? AND Password=? AND Discriminator LIKE '%Administrateur'";
     public static final String INSERT_ADMINISTRATEUR = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Password,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
-    public static final String UPDATE_ADMINISTRATEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?, Password = ?,Discriminator = ? WHERE ID = ?";
-    public static final String DELETE_ADMINISTRATEUR = "DELETE FROM Personne WHERE ID = ?";
+    public static final String UPDATE_ADMINISTRATEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?, Password = ?,Discriminator = ? WHERE ID = ? ";
+    public static final String DELETE_ADMINISTRATEUR = "DELETE FROM Personne WHERE ID = ? AND Discriminator LIKE '%Administrateur'";
     
     // PROFESSEUR
     public static final String SELECT_ALL_PROFESSEUR = "SELECT * FROM Personne WHERE Discriminator = ?";
-    public static final String SELECT_ALL_PROFESSEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
-    public static final String SELECT_ALL_PROFESSEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
-    public static final String SELECT_PROFESSEUR_BY_ID = "SELECT * FROM Personne WHERE ID=?";
+    public static final String SELECT_ALL_PROFESSEUR_BY_NAME = "SELECT * FROM Personne WHERE Nom=? AND Discriminator LIKE '%Professeur'";
+    public static final String SELECT_ALL_PROFESSEUR_BY_MAIL = "SELECT * FROM Personne WHERE Mail=? AND Discriminator LIKE '%Professeur'";
+    public static final String SELECT_PROFESSEUR_BY_ID = "SELECT * FROM Personne WHERE ID=? AND Discriminator LIKE '%Professeur'";
+    public static final String SELECT_PROFESSEUR_BY_MAIL_AND_PWD = "SELECT * FROM Personne WHERE Mail=? AND Password=? AND Discriminator LIKE '%Professeur'";
     public static final String INSERT_PROFESSEUR = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Password,NbHeureActiviteMaxSemaine,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_PROFESSEUR = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?, Password = ?, NbHeureActiviteMaxSemaine = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_PROFESSEUR = "DELETE FROM Personne WHERE ID = ?";
     
     // CLIENT
-    public static final String SELECT_ALL_CLIENT = "SELECT * FROM Personne WHERE Discriminator = ?";
-    public static final String SELECT_ALL_CLIENT_BY_NAME = "SELECT * FROM Personne WHERE Nom=?";
-    public static final String SELECT_ALL_CLIENT_BY_MAIL = "SELECT * FROM Personne WHERE Mail=?";
-    public static final String SELECT_CLIENT_BY_ID = "SELECT * FROM Personne WHERE ID=?";
+    public static final String SELECT_ALL_CLIENT = "SELECT * FROM Personne WHERE Discriminator = ? ";
+    public static final String SELECT_ALL_CLIENT_BY_NAME = "SELECT * FROM Personne WHERE Nom=? AND Discriminator LIKE '%Client'";
+    public static final String SELECT_ALL_CLIENT_BY_MAIL = "SELECT * FROM Personne WHERE Mail=? AND Discriminator LIKE '%Client'";
+    public static final String SELECT_CLIENT_BY_ID = "SELECT * FROM Personne WHERE ID=? AND Discriminator LIKE '%Client'";
+    public static final String SELECT_CLIENT_BY_MAIL_AND_PWD = "SELECT * FROM Personne WHERE Mail=? AND Password=? AND Discriminator LIKE '%Client'";
     public static final String INSERT_CLIENT = "INSERT INTO Personne (ID,Prenom,Nom,Mail,Telephone,DateNaissance,Password,Discriminator) VALUES (DEFAULT,?,?,?,?,?,?,?)";
     public static final String UPDATE_CLIENT = "UPDATE Personne SET Prenom = ?, Nom = ?,Mail = ?,Telephone = ?,DateNaissance = ?, Password = ?,Discriminator = ? WHERE ID = ?";
     public static final String DELETE_CLIENT = "DELETE FROM Personne WHERE ID = ?";

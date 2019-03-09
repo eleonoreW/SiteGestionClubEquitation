@@ -8,7 +8,19 @@
     
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">  
-<!-- _______________ Redirections _______________ -->        
+<!-- _______________ Redirections _______________ -->    
+        <action name="gotoConnexion" 
+            class="actions.HelloWorldAction" 
+            method="execute">
+            <result name="success">/connexion.jsp</result>
+        </action>
+        <action name="gotoChevalSearch" 
+            class="actions.SearchChevalAction" 
+            method="gotoSearchCheval">
+            <result name="success">/jsp/cheval/ChevalSearch.jsp</result>
+        </action>
+        
+        
         <action name="gotoAdministrateur" 
             class="actions.HelloWorldAction" 
             method="execute">
@@ -24,7 +36,20 @@
             method="execute">
             <result name="success">/jsp/administrateur/GestionClient.jsp</result>
         </action>
+        <action name="gotoCheval" 
+            class="actions.ChevalAction" 
+            method="prepareCreateCheval">
+            <result name="success">/jsp/cheval/ChevalCreate.jsp</result>
+        </action>
+ 
+<!-- _______________ Gestion connexion _______________ --> 
+        <action name="login" class="actions.LoginAction" method="execute">         
+            <result name="success">/jsp/connection/GestionAdmin.jsp</result>
+            <result name="error">/connexion.jsp</result>
+	</action>
         
+        
+                             
 <!-- _______________ Gestion administrateurs _______________ -->         
         <action name="AddNewAdminForm" 
                 class="actions.AdminAction" 
@@ -115,6 +140,19 @@
                 class="actions.ClientAction" 
                 method="deleteClient"> 
              <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
-         </action>      
+         </action>   
+         
+<!-- _______________ Gestion chevaux _______________ -->           
+        <action name="searchCheval" 
+                class="actions.SearchChevalAction" 
+                method="prepare"> 
+            <result name="success">/jsp/cheval/ChevalSearch.jsp</result> 
+        </action>    
+        <action name="createCheval" 
+                class="actions.ChevalAction" 
+                method="createCheval"> 
+            <result name="success">/jsp/cheval/ChevalCreate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalCreate.jsp</result> 
+        </action>   
     </package>
 </struts>

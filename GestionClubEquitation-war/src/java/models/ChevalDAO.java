@@ -30,7 +30,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             statement.setInt(1, object.getRace().getRace_id());
             statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
-            statement.setString(4, object.getDateNaissance());
+            statement.setInt(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
             statement.setString(6, object.getCommentaire());
             statement.setInt(7, object.getNbHeureMaxSemaine());
@@ -70,7 +70,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             statement.setInt(1, object.getRace().getRace_id());
             statement.setInt(2, object.getProprietaire().getId());
             statement.setString(3, object.getNom());
-            statement.setString(4, object.getDateNaissance());
+            statement.setInt(4, object.getDateNaissance());
             statement.setString(5, object.getDescription());
             statement.setString(6, object.getCommentaire());
             statement.setInt(7, object.getNbHeureMaxSemaine());
@@ -103,7 +103,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             if(res.next()){
                 race = raceDAO.findById(res.getInt("ID"));
                 personne = personneDAO.findById(res.getInt("ID"));
-                cheval = new Cheval(res.getInt("ID"),race,personne,res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+                cheval = new Cheval(res.getInt("ID"),race,personne,res.getString("Nom"),res.getInt("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
             }
             statement.close();
             res.close();
@@ -128,7 +128,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             if(res.next()) {
                 race = raceDAO.findById(res.getInt("RaceID"));
                 personne = personneDAO.findById(res.getInt("PersonneID"));
-                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getInt("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
             }
             statement.close();
             res.close();
@@ -155,7 +155,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             while(res.next()) {
                 race = raceDAO.findById(res.getInt("ID"));
                 personne = personneDAO.findById(res.getInt("ID"));
-                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getString("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+                cheval = new Cheval(res.getInt("ID"),race,personne, res.getString("Nom"),res.getInt("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
                 listCheval.add(cheval);
             }
             res.close();
@@ -167,6 +167,53 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         return listCheval;
     }
 
+    public ArrayList<Cheval> filterBy(String nom, Race race, Personne proprietaire, int dateNaissanceMin, int dateNaissanceMax, int tailleMin, int tailleMax ){
+        listCheval = new ArrayList<>();
+        Race raceCheval = null;
+        Personne personne = null;
+        
+        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        String queryString = SQLConstant.SELECT_ALL_CHEVAL +" WHERE ID ";
+        // Prepare query
+        if(nom != null){
+            queryString += " AND " + SQLConstant.WITH_NAME_LIKE+" '%"+nom+"%' ";
+        }
+        if(race != null){
+            race = raceDAO.findByName(race.getNom());
+            if(race != null){
+                queryString += " AND " + SQLConstant.WITH_RACEID + " " + race.getRace_id() + " ";
+            }
+            
+        }/*
+        if(proprietaire != null){
+            proprietaire = personneDAO.findByMail(proprietaire.getMail());
+            if(proprietaire != null){
+                queryString += " AND" + SQLConstant.WITH_RACEID + proprietaire.getRace_id();
+            }
+        }*/
+        queryString += " AND " + SQLConstant.WITH_DATENAISSANCE_GEQ+ " " + dateNaissanceMin + " ";
+        queryString += " AND " + SQLConstant.WITH_DATENAISSANCE_LEQ+ " " + dateNaissanceMax + " ";
+        
+        queryString += " AND" + SQLConstant.WITH_TAILLE_GEQ + " " + tailleMin + " ";
+        queryString += " AND" + SQLConstant.WITH_TAILLE_LEQ + " " + tailleMax + " ";
+        System.out.println("MyQuery : "+ queryString);
+        try {
+            PreparedStatement statement = connection.prepareStatement(queryString, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet res = statement.executeQuery();
+            while(res.next()) {
+                raceCheval = raceDAO.findById(res.getInt("ID"));
+                personne = personneDAO.findById(res.getInt("ID"));
+                cheval = new Cheval(res.getInt("ID"),raceCheval,personne, res.getString("Nom"),res.getInt("dateNaissance"),res.getString("Description"),res.getString("Commentaire"),res.getInt("NbHeureMaxSemaine"),res.getInt("taille"));
+                listCheval.add(cheval);
+            }
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return listCheval;
+    }
+    
+    
     // PAS FINI
     public static void main(String args[]) {
         
@@ -184,7 +231,7 @@ public class ChevalDAO extends CommonDAO<Cheval> {
         
         if(race != null){
             if(proprietaire != null){
-                Cheval cheval = new Cheval(race, proprietaire, "Zeus", "241096", "descriptionducheval", "commentairecheval", 10, 175);
+                Cheval cheval = new Cheval(race, proprietaire, "Zeus", 24101996, "descriptionducheval", "commentairecheval", 10, 175);
                 ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
                 if(chevalDAO.findByName(cheval.getNom()) == null){
                    chevalDAO.create(cheval);
@@ -207,7 +254,28 @@ public class ChevalDAO extends CommonDAO<Cheval> {
             System.out.println(cheval2.getNom());
         }
         
+        race = new Race("Appaloosa");
         
+        
+        System.out.println("Tri par taille >160 < 165, race Appaloosa");
+        listCheval = chevalDAO.filterBy(null, race, null, 0, 8092019, 160, 165);
+        
+        it = listCheval.iterator();
+        
+        while(it.hasNext()){
+            cheval2 = (Cheval)it.next();
+            System.out.println(cheval2.getNom());
+        }
       
+        System.out.println("Tri par nom contient \'ie\'");
+        listCheval = chevalDAO.filterBy("ie", null, null, 0, 8092019, 0, 5000);
+        
+        it = listCheval.iterator();
+        
+        while(it.hasNext()){
+            cheval2 = (Cheval)it.next();
+            System.out.println(cheval2.getNom());
+        }
+        
     }
 }
