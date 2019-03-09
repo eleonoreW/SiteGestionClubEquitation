@@ -18,7 +18,7 @@
                     <a class="nav-link" href="">Activités</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Chevaux</a>
+                    <a class="nav-link" href="searchCheval.jsp">Chevaux</a>
                 </li>
                 <li>
                     <a class="nav-link" href="connection.jsp">Se connecter</a>
