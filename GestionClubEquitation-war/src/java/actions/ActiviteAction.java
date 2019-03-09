@@ -21,13 +21,14 @@ public class ActiviteAction {
     
     private Activite activite;
     private ActiviteDAO activiteDAO;
+    private int nbPlaceDispo;
     public List<Activite> listActivite;
     
+    private int id;
     private String nom;
     private String commentaire = "";
     private String details;
     private String date;
-    
     private String duree;
     private String capacite;
     private boolean estActive = true;
@@ -43,7 +44,7 @@ public class ActiviteAction {
     private List<String> listChevalSelected = new ArrayList<>();
     
     
-    public String execute() {
+    public String addActivite() {
         
         HttpServletRequest req = ServletActionContext.getRequest();
         
@@ -55,16 +56,7 @@ public class ActiviteAction {
         
         LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
         Lieu lieu = lieuDAO.findByName(lieuSelected);
-        
-        
-        
-//        setNom(req.getParameter("activite_nom"));
-//        setDetails(req.getParameter("activite_details"));
-//        setDate(Integer.parseInt(req.getParameter("date")));
-//        setDuree(Integer.parseInt(req.getParameter("activite_duree")));
-//        setCapacite(Integer.parseInt(req.getParameter("activite_capacite")));
-       
-        
+             
         activite = new Activite(prof, lieu, type, nom, commentaire, details, Integer.parseInt(date), Integer.parseInt(duree), Integer.parseInt(capacite), estActive);
         
         setActivite(activite);
@@ -86,6 +78,80 @@ public class ActiviteAction {
         }  
     }
     
+     public String displayAll(){
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());                    
+        listActivite = activiteDAO.findAll();
+        return "success";
+    }
+     
+    public String loadActivite(){
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());                    
+        //activite = activiteDAO.findByNameDate(req.getParameter("nom"),Integer.parseInt(req.getParameter("date")));
+        activite = activiteDAO.findByName(req.getParameter("nom"));
+        
+        setId(activite.getActivite_id());
+        setNom(activite.getNom());
+        setCommentaire(activite.getCommentaire());
+        setDetails(activite.getDetails());
+        setDate(Integer.toString(activite.getDate()));
+        setDuree(Integer.toString((int)activite.getDuree()));
+        setCapacite(Integer.toString(activite.getCapacite()));
+        
+        return "success";
+    }
+    
+    
+    public String replaceActivite() throws Exception {   
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        setId(Integer.parseInt(req.getParameter("id")));
+        setNom(activite.getNom());
+        setCommentaire(activite.getCommentaire());
+        setDetails(activite.getDetails());
+        setDate(Integer.toString(activite.getDate()));
+        setDuree(Float.toString(activite.getDuree()));
+        setCapacite(Integer.toString(activite.getCapacite()));
+        
+        ProfesseurDAO professeurDAO = new ProfesseurDAO(ConnectionDB.getInstance());
+        Professeur prof = professeurDAO.findByMail(activite.getPersonne().getMail());
+        
+        TypeDAO typeDAO = new TypeDAO(ConnectionDB.getInstance());
+        Type type = typeDAO.findByName(activite.getType().getNom());
+        
+        LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
+        Lieu lieu = lieuDAO.findByName(activite.getLieu().getNom());
+
+        activite = new Activite(prof, lieu, type, nom, commentaire, details, Integer.parseInt(date), Integer.parseInt(duree), Integer.parseInt(capacite), estActive);
+             
+        setActivite(activite);
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+        activiteDAO.update(activite);
+        if(getActivite()!= null){
+            return "success";
+        }else{
+            return "error";
+         }
+    }
+    
+    public String deleteActivite() throws Exception {   
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        setId(Integer.parseInt(req.getParameter("id")));
+       
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+        activite = activiteDAO.findById(id);
+        activiteDAO.delete(activite);
+        if(getActivite()!= null){
+            return "success";
+        }else{
+            return "error";
+         }
+    }
+    
+    
+    
     public String prepare(){
         LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
         listLieu = lieuDAO.findAll();
@@ -102,6 +168,39 @@ public class ActiviteAction {
         return "success";
     }
 
+    public String displayAllFuturDateNotCanceled() {
+        ActiviteDAO activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+        listActivite = activiteDAO.findAllFuturDateNotCanceled();
+        
+        return "success";
+    }
+    
+    public String loadActiviteClient() {
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());                    
+        activite = activiteDAO.findById(Integer.parseInt(req.getParameter("activite_id")));
+        
+        
+        setId(activite.getActivite_id());
+        setNom(activite.getNom());
+        setCommentaire(activite.getCommentaire());
+        setDetails(activite.getDetails());
+        setDate(Integer.toString(activite.getDate()));
+        setDuree(Integer.toString((int)activite.getDuree()));
+        setCapacite(Integer.toString(activite.getCapacite()));
+        
+        setProfSelected(activite.getPersonne().getNom());
+        setLieuSelected(activite.getLieu().getNom());
+        setTypeSelected(activite.getType().getNom());
+        
+        
+        // calcul du nombre de palces dispo
+        nbPlaceDispo = activiteDAO.getNbPlaceDispo(activite.getActivite_id());
+        
+        return "success";
+    }
+    
     //Getter et setter
     public Activite getActivite() {
         return activite;
@@ -127,6 +226,13 @@ public class ActiviteAction {
         this.listActivite = listActivite;
     }
 
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getNom() {
         return nom;
     }
@@ -246,4 +352,14 @@ public class ActiviteAction {
     public void setListChevalSelected(List<String> listChevalSelected) {
         this.listChevalSelected = listChevalSelected;
     }
+
+    public int getNbPlaceDispo() {
+        return nbPlaceDispo;
+    }
+
+    public void setNbPlaceDispo(int nbPlaceDispo) {
+        this.nbPlaceDispo = nbPlaceDispo;
+    }
+    
+    
 }

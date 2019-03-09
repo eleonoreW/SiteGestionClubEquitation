@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import javabeans.Activite;
@@ -241,6 +243,65 @@ public class ActiviteDAO extends CommonDAO<Activite> {
 
         return activite;
         
+    }
+    
+    
+    public ArrayList<Activite> findAllFuturDateNotCanceled() {
+        listActivite = new ArrayList<>();
+
+        Personne personne = null;
+        Lieu lieu = null;
+        Type type = null;
+
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
+        TypeDAO typeDAO = new TypeDAO(ConnectionDB.getInstance());
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_ACTIVITE_FUTUR_DATE_NOT_CANCELED, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            
+            // get the current date
+            String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+                        
+            statement.setInt(1, Integer.parseInt(timeStamp)); 
+            ResultSet res = statement.executeQuery();
+                    
+            while (res.next()) {
+                personne = personneDAO.findById(res.getInt("PersonneID"));
+                lieu = lieuDAO.findById(res.getInt("LieuID"));
+                type = typeDAO.findById(res.getInt("TypeID"));
+                activite = new Activite(res.getInt("ID"), personne, lieu, type, res.getString("Nom"), res.getString("Commentaire"), res.getString("Details"), res.getInt("Date"), res.getFloat("Duree"), res.getInt("Capacite"), res.getBoolean("EstActive"));
+
+                listActivite.add(activite);
+            }
+            res.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listActivite;
+    }
+    
+    public int getNbPlaceDispo(int id) {  
+        activite = findById(id);
+        
+        int nbPlaceReserv = 0;
+        try {
+        PreparedStatement statement = connection.prepareStatement(SQLConstant.SUM_PLACE_DISPO);
+        statement.setInt(1, id);
+        
+        ResultSet res = statement.executeQuery();
+        
+        if(res.next()) {
+            nbPlaceReserv = res.getInt("Count");
+        }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return activite.getCapacite() - nbPlaceReserv;
     }
 
     @Override

@@ -15,7 +15,7 @@
                     <a class="nav-link" href="">A propos</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Activités</a>
+                    <a class="nav-link" href="goToListeActivitesClient">Activités</a>
                 </li>
                 <li>
                     <a class="nav-link" href="">Chevaux</a>

@@ -16,25 +16,64 @@
         </action>
         
         <action name = "goToAddActivite"
-            class = "actions.AddActiviteAction"
+            class = "actions.ActiviteAction"
             method= "prepare">
             <result name = "success">/jsp/creationActivite.jsp</result>
         </action>
         
         <action name = "creationActivite"
-            class = "actions.AddActiviteAction"
+            class = "actions.ActiviteAction"
             method= "execute">
             <result name = "success">index.jsp</result>
         </action>
         
+        <action name="AfficheAllActivites" 
+                class="actions.ActiviteAction" 
+                method="displayAll"> 
+             <result name="success">/jsp/afficheAllActivites.jsp</result> 
+         </action> 
+         
+         <action name="LoadActivite" 
+                class="actions.ActiviteAction" 
+                method="loadActivite"> 
+             <result name="success">/jsp/modifieActivite.jsp</result> 
+         </action> 
+         
+         <action name="ReplaceActivite" 
+                class="actions.ActiviteAction" 
+                method="replaceActivite"> 
+             <result name="success">/jsp/afficheAllActivites.jsp</result> 
+         </action> 
+         
+         <action name="DeleteActivite" 
+                class="actions.ActiviteAction" 
+                method="deleteActivite"> 
+             <result name="success">/jsp/HelloWorld.jsp</result> 
+         </action> 
+         
+         
+         <action name="goToListeActivitesClient"
+                class="actions.ActiviteAction" 
+                method="displayAllFuturDateNotCanceled" >
+            <result name="success">/jsp/AfficheCourantesActivites.jsp</result>
+         </action>
+         
+         <action name="LoadActiviteClient"
+                class="actions.ActiviteAction" 
+                method="loadActiviteClient" >
+            <result name="success">/jsp/AfficheActiviteClient.jsp</result>
+         </action>
+         
+         
+        
         <action name = "goToAddCheval"
-            class = "actions.AddAChevalAction"
+            class = "actions.ChevalAction"
             method= "prepare">
             <result name = "success">/jsp/creationCheval.jsp</result>
         </action>
         
         <action name = "creationCheval"
-            class = "actions.AddAChevalAction"
+            class = "actions.ChevalAction"
             method= "execute">
             <result name = "success">index.jsp</result>
         </action>
