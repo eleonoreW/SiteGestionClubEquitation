@@ -16,8 +16,9 @@
          <label for = "name">Please enter your name</label><br/>
          <input type = "text" name = "name"/>
          <input type = "submit" value = "Say Hello"/>
-      </form>cicousffgh
-      
+      </form>
+      coucou
+      coucou
       
     <!------ FOOTER ------->  
     <%@ include file="jsp/template/Footer.jsp"%>
