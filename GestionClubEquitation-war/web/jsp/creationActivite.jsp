@@ -32,7 +32,7 @@
                     value="selectedDuree"
                     required="true" />
                 
-                <s:textfield name="capacite" id="activite_capacite"
+                <s:textfield name="capacite" type="number" id="activite_capacite"
                         label="Capacité" labelposition="left">
                 </s:textfield>
                 
