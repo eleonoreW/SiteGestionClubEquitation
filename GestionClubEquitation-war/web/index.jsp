@@ -17,11 +17,11 @@
         <!------ /MENU ------>
         
       <h1>Hello World From Struts2</h1>
-      <form action = "goToAddActivite">
+      <form action="goToAddCheval">
          <label for = "name">Please enter your name</label><br/>
          <input type = "text" name = "name"/>
          <input type = "submit" value = "Say Hello"/>
-      </form>
+      </form>cicousffgh
       
       
     <!------ FOOTER ------->  

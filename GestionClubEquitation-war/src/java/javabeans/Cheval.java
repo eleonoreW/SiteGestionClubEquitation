@@ -5,13 +5,13 @@ public class Cheval {
     private Race race;
     private Personne proprietaire;
     private String nom;
-    private String dateNaissance;
+    private int dateNaissance;
     private String description;
     private String commentaire;
     private int nbHeureMaxSemaine;
     private int taille;
 
-    public Cheval(int cheval_id, Race race, Personne proprietaire, String nom, String dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
+    public Cheval(int cheval_id, Race race, Personne proprietaire, String nom, int dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
         this.cheval_id = cheval_id;
         this.race = race;
         this.proprietaire = proprietaire;
@@ -23,7 +23,7 @@ public class Cheval {
         this.taille = taille;
     }
 
-    public Cheval(Race race, Personne proprietaire, String nom, String dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
+    public Cheval(Race race, Personne proprietaire, String nom, int dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
         this.race = race;
         this.proprietaire = proprietaire;
         this.nom = nom;
@@ -54,7 +54,7 @@ public class Cheval {
         return nom;
     }
 
-    public String getDateNaissance() {
+    public int getDateNaissance() {
         return dateNaissance;
     }
 
@@ -90,7 +90,7 @@ public class Cheval {
         this.nom = nom;
     }
 
-    public void setDateNaissance(String dateNaissance) {
+    public void setDateNaissance(int dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 

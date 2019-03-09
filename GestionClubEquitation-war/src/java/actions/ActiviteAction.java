@@ -1,8 +1,6 @@
 package actions;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javabeans.Cheval;
 import javabeans.Lieu;
@@ -19,7 +17,7 @@ import models.TypeDAO;
 import org.apache.struts2.ServletActionContext;
 
 
-public class AddActiviteAction {
+public class ActiviteAction {
     
     private Activite activite;
     private ActiviteDAO activiteDAO;
