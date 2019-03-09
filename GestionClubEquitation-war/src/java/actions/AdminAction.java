@@ -30,7 +30,6 @@ public class AdminAction {
     private String nom;
     private String prenom;
     private String mail;
-    private String password;
     private String telephone;
     private int date_naissance;
 
@@ -41,12 +40,11 @@ public class AdminAction {
         setNom(req.getParameter("admin_nom"));
         setPrenom(req.getParameter("admin_prenom"));
         setMail(req.getParameter("admin_mail"));
-        setPassword(req.getParameter("admin_password"));
         setTelephone(req.getParameter("admin_tel"));
         setDate_naissance(Integer.parseInt(req.getParameter("admin_datenaissance")));
         
 
-        administrateur =  new Administrateur(nom, prenom, mail, telephone, date_naissance,password);
+        administrateur =  new Administrateur(nom, prenom, mail, telephone, date_naissance,"bli");
              
         setAdministrateur(administrateur);
         administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());
@@ -77,7 +75,6 @@ public class AdminAction {
         setNom(administrateur.getNom());
         setPrenom(administrateur.getPrenom());
         setMail(administrateur.getMail());
-        setPassword(administrateur.getPassword());
         setTelephone(administrateur.getTelephone());
         setDate_naissance(administrateur.getDate_naissance());
         
@@ -91,11 +88,11 @@ public class AdminAction {
         setNom(req.getParameter("admin_nom"));
         setPrenom(req.getParameter("admin_prenom"));
         setMail(req.getParameter("admin_mail"));
-        setPassword(req.getParameter("admin_password"));
         setTelephone(req.getParameter("admin_tel"));
         setDate_naissance(Integer.parseInt(req.getParameter("admin_datenaissance")));
+        
 
-        administrateur =  new Administrateur(id,nom, prenom, mail, telephone, date_naissance,password);
+        administrateur =  new Administrateur(id,nom, prenom, mail, telephone, date_naissance,"bli");
              
         setAdministrateur(administrateur);
         administrateurDAO = new AdministrateurDAO(ConnectionDB.getInstance());
@@ -162,15 +159,6 @@ public class AdminAction {
         this.mail = mail;
     }
 
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
     public String getTelephone() {
         return telephone;
     }
