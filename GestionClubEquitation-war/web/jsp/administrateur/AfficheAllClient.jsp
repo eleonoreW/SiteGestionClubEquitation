@@ -13,7 +13,6 @@
     <table class="table">
         <thead>
         <tr>
-    <th scope="col"></th>
     <th scope="col">Nom</th>
     <th scope="col">Prenom</th>
     <th scope="col">Mail</th>
@@ -24,7 +23,7 @@
   <tbody>
     <s:iterator value="listAll" status="ligne">
     <tr>
-        <td><s:a href="LoadAdmin?mail=%{mail}"><s:property value="nom"/></s:a></td>
+        <td><s:a href="LoadClient?mail=%{mail}"><s:property value="nom"/></s:a></td>
         <td><s:property value="prenom"/></td>
         <td><s:property value="mail"/></td>
         <td><s:property value="telephone"/></td>
@@ -36,7 +35,7 @@
  </s:if>
   
 <s:else>
-    Aucun Administrateur dans la liste
+    Aucun Client dans la liste
 </s:else>
   
 

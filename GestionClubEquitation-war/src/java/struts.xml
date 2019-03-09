@@ -8,17 +8,28 @@
     
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">  
-        
-        <action name="hello" 
+<!-- _______________ Redirections _______________ -->        
+        <action name="gotoAdministrateur" 
             class="actions.HelloWorldAction" 
             method="execute">
-            <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result>
+            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result>
+        </action>
+        <action name="gotoProfesseur" 
+            class="actions.HelloWorldAction" 
+            method="execute">
+            <result name="success">/jsp/administrateur/GestionProf.jsp</result>
+        </action>
+        <action name="gotoClient" 
+            class="actions.HelloWorldAction" 
+            method="execute">
+            <result name="success">/jsp/administrateur/GestionClient.jsp</result>
         </action>
         
+<!-- _______________ Gestion administrateurs _______________ -->         
         <action name="AddNewAdminForm" 
                 class="actions.AdminAction" 
                 method="register"> 
-             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+             <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
          </action> 
          
          <action name="AfficheAllAdministrateurs" 
@@ -36,14 +47,74 @@
          <action name="ReplaceAdmin" 
                 class="actions.AdminAction" 
                 method="replaceAdmin"> 
-             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+             <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
          </action> 
          
          <action name="DeleteAdmin" 
                 class="actions.AdminAction" 
                 method="deleteAdmin"> 
-             <result name="success">/jsp/administrateur/AjoutAdmin.jsp</result> 
+             <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
          </action> 
-        
+<!-- _______________ Gestion professeurs _______________ -->         
+        <action name="AddNewProfesseurForm" 
+                class="actions.ProfesseurAction" 
+                method="register"> 
+             <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+         </action> 
+         
+         <action name="AfficheAllProfesseurs" 
+                class="actions.ProfesseurAction" 
+                method="displayAll"> 
+             <result name="success">/jsp/administrateur/AfficheAllProfesseur.jsp</result> 
+         </action> 
+         
+         <action name="LoadProfesseur" 
+                class="actions.ProfesseurAction" 
+                method="loadProfesseur"> 
+             <result name="success">/jsp/administrateur/ModifieProfesseur.jsp</result> 
+         </action> 
+         
+         <action name="ReplaceProfesseur" 
+                class="actions.ProfesseurAction" 
+                method="replaceProfesseur"> 
+             <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+         </action> 
+         
+         <action name="DeleteProfesseur" 
+                class="actions.ProfesseurAction" 
+                method="deleteProfesseur"> 
+             <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+         </action>     
+         
+<!-- _______________ Gestion clients _______________ -->         
+        <action name="AddNewClientForm" 
+                class="actions.ClientAction" 
+                method="register"> 
+             <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+         </action> 
+         
+         <action name="AfficheAllClients" 
+                class="actions.ClientAction" 
+                method="displayAll"> 
+             <result name="success">/jsp/administrateur/AfficheAllClient.jsp</result> 
+         </action> 
+         
+         <action name="LoadClient" 
+                class="actions.ClientAction" 
+                method="loadClient"> 
+             <result name="success">/jsp/administrateur/ModifieClient.jsp</result> 
+         </action> 
+         
+         <action name="ReplaceClient" 
+                class="actions.ClientAction" 
+                method="replaceClient"> 
+             <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+         </action> 
+         
+         <action name="DeleteClient" 
+                class="actions.ClientAction" 
+                method="deleteClient"> 
+             <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+         </action>      
     </package>
 </struts>
