@@ -154,5 +154,11 @@
             <result name="success">/jsp/cheval/ChevalCreate.jsp</result> 
             <result name="error">/jsp/cheval/ChevalCreate.jsp</result> 
         </action>   
+        <action name="updateCheval"
+                class="actions.ChevalAction" 
+                method="prepareUpdateCheval"> 
+            <result name="success">/jsp/cheval/ChevalUpdate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalUpdate.jsp</result> 
+        </action>  
     </package>
 </struts>

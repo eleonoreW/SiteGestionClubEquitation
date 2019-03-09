@@ -30,6 +30,8 @@ public class ChevalAction {
     private String proprietaireSelected;
     private String raceSelected;
     
+    private Cheval chevalAmodifier;
+    
     public String createCheval() {
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         listRace = raceDAO.findAll();
@@ -66,6 +68,53 @@ public class ChevalAction {
         listProprietaire = personneDAO.findAll();
         
         return "success";
+    }
+    
+    
+    public String updateCheval() {
+        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+        listRace = raceDAO.findAll();
+        
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        listProprietaire = personneDAO.findAll();
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        if(chevalDAO.findByName(nom) == null){
+            Personne proprietaire = personneDAO.findByMail(proprietaireSelected);
+
+            Race race = raceDAO.findByName(raceSelected);
+
+            Cheval cheval = new Cheval(race,proprietaire,nom,Integer.parseInt(dateNaissance),description,commentaire,Integer.parseInt(nbHeureMaxSemaine), Integer.parseInt(taille));
+
+            chevalDAO.create(cheval);
+
+            if(chevalDAO.findByName(nom) != null){
+                return "success";
+            }else{
+                return "error";
+            }  
+        }else{
+            return "error";
+        }
+    }
+    
+    public String prepareUpdateCheval(){
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        chevalAmodifier = chevalDAO.findByName(nom);
+        
+        if(chevalAmodifier != null){
+            RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+            listRace = raceDAO.findAll();
+
+            PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+            listProprietaire = personneDAO.findAll();
+            return "success";
+        }else {
+            return "error";
+        }
     }
 
     //Getter et setter
