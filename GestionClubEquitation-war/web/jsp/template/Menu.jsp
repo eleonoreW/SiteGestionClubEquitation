@@ -2,7 +2,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="index.jsp">
             <img class="img-fluid" src="img/logo.png" alt="club logo" style="max-height: 50px">
             <span class="littleMAJ">Club Équitation</span>
         </a>

@@ -43,7 +43,9 @@
         </action>
  
 <!-- _______________ Gestion connexion _______________ --> 
-        <action name="login" class="actions.LoginAction" method="execute">         
+        <action name="loginPersonne" 
+                class="actions.LoginAction" 
+                method="execute">         
             <result name="success">/jsp/administrateur/GestionAdmin.jsp</result>
             <result name="error">/connexion.jsp</result>
 	</action>
