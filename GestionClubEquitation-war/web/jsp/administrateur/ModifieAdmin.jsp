@@ -4,7 +4,14 @@
     Author     : bguil
 --%>
 
-
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
         <%@ taglib prefix="s" uri="/struts-tags" %>
         <h1>Hello World!</h1>
         
@@ -19,9 +26,7 @@
               </s:textfield>	
               <s:textfield name="admin_mail" id="admin_mail" value="%{mail}"
                       label="mail" labelposition="left" required="required">
-              </s:textfield>
-              <s:password name="admin_password" value="%{password}"
-                     label="password" labelposition="left" required="required"></s:password>
+              </s:textfield>	
               <s:textfield name="admin_tel" id="admin_tel" value="%{telephone}"
                       label="tel" labelposition="left" required="required">
               </s:textfield>
@@ -36,3 +41,6 @@
             <s:submit value = "Delete" align="center"></s:submit>
         </s:form>
 
+            
+    </body>
+</html>

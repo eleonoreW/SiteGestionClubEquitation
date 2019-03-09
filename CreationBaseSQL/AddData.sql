@@ -6,7 +6,7 @@ INSERT INTO `Race`(`ID`, `Nom`) VALUES (2, 'Shetland');
 INSERT INTO `Personne`(`ID`, `Prenom`, `Nom`, `Mail`, `Telephone`, `DateNaissance`, `NbHeureActiviteMaxSemaine`, `Discriminator`, `Password`) VALUES (1, 'Eleonore', 'W', 'eleo@mail.ca', '459456123', 2121996, null, 'javabeans.Client', null);
 INSERT INTO `Personne`(`ID`, `Prenom`, `Nom`, `Mail`, `Telephone`, `DateNaissance`, `NbHeureActiviteMaxSemaine`, `Discriminator`, `Password`) VALUES (2, 'Guillaume', 'B', 'guigui@mail.ca', '549456123', 212990, null, 'javabeans.Client', null);
 INSERT INTO `Personne`(`ID`, `Prenom`, `Nom`, `Mail`, `Telephone`, `DateNaissance`, `NbHeureActiviteMaxSemaine`, `Discriminator`, `Password`) VALUES (3, 'Lisa', 'S', 'oney4eva@mail.ca', '789456123', 2122010, null, 'javabeans.Professeur', null);
-INSERT INTO `Lieu`(`ID`, `Nom`, `Capacite`, `Description`) VALUES (1, 'Pré Ouest', 4, '(NULL)');
+INSERT INTO `Lieu`(`ID`, `Nom`, `Capacite`, `Description`) VALUES (1, 'Pré Ouest', 4, null);
 INSERT INTO `Lieu`(`ID`, `Nom`, `Capacite`, `Description`) VALUES (2, 'Pré Nord', 2, null);
 INSERT INTO `Lieu`(`ID`, `Nom`, `Capacite`, `Description`) VALUES (3, 'Pré-Jean', 4, '');
 INSERT INTO `Lieu`(`ID`, `Nom`, `Capacite`, `Description`) VALUES (4, 'Manège A', 8, null);
