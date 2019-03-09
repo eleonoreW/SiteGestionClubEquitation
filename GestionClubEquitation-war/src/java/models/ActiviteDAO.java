@@ -349,7 +349,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         
         return activite.getCapacite() - nbPlaceReserv;
     }
-    
+        
     
     public static void main(String args[]) {
         List<Activite> listActivite;

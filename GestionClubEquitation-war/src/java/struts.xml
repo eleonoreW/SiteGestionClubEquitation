@@ -73,9 +73,16 @@
         
         
         <action name="LoadActiviteClient"
-            class="action.ActiviteAction"
+            class="actions.ActiviteAction"
             methode="loadActiviteClient">
             <result name="success">/jsp/activite/AfficheActiviteClient.jsp</result>
+        </action>
+        
+        
+        <action name="ReserveActivite"
+            class="actions.ActiviteAction"
+            methode="reserverActivite">
+            <result name="success">/jsp/activite/AfficheCourantesActivites.jsp</result>
         </action>
         
     </package>

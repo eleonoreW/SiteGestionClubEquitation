@@ -1,18 +1,26 @@
 package actions;
 
+import com.opensymphony.xwork2.ActionContext;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
+import javabeans.Activite;
 import javabeans.Cheval;
 import javabeans.Lieu;
+import javabeans.Personne;
 import javabeans.Professeur;
+import javabeans.Reservation;
 import javabeans.Type;
-import javabeans.Activite;
 import javax.servlet.http.HttpServletRequest;
 import models.ActiviteDAO;
 import models.ChevalDAO;
 import models.ConnectionDB;
 import models.LieuDAO;
+import models.PersonneDAO;
 import models.ProfesseurDAO;
+import models.ReservationDAO;
 import models.TypeDAO;
 import org.apache.struts2.ServletActionContext;
 
@@ -26,6 +34,7 @@ public class ActiviteAction {
     private ActiviteDAO activiteDAO;
     public List<Activite> listActivite;
     
+    private String activite_id;
     private String nom;
     private String commentaire = "";
     private String details;
@@ -121,6 +130,36 @@ public class ActiviteAction {
         
         // calcul du nombre de palces dispo
         nbPlaceDispo = activiteDAO.getNbPlaceDispo(activite.getActivite_id());
+        
+        return "success";
+    }
+    
+    public String reserver() {
+        
+        // get nbPersonne
+        HttpServletRequest req = ServletActionContext.getRequest();
+        int nbPersonne = Integer.parseInt(req.getParameter("nbPersonne"));
+        
+        // get activite
+        activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());   
+        activite = activiteDAO.findById(Integer.parseInt(req.getParameter("activite_id")));
+        
+        // get date
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+        
+        // get mail client
+        Map<String, Object> session;
+        // get the current session
+        session = ActionContext.getContext().getSession();
+        // get the client mail
+        String mailClient = (String) session.get("email");
+        // get client
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        Personne personne = personneDAO.findByMail(mailClient);
+        
+        Reservation reservation = new Reservation(Integer.parseInt(timeStamp), nbPersonne, 1, personne, activite);
+        ReservationDAO reservationDAO = new ReservationDAO(ConnectionDB.getInstance());
+        reservationDAO.create(reservation);
         
         return "success";
     }
@@ -269,4 +308,22 @@ public class ActiviteAction {
     public void setListChevalSelected(List<String> listChevalSelected) {
         this.listChevalSelected = listChevalSelected;
     }
+
+    public int getNbPlaceDispo() {
+        return nbPlaceDispo;
+    }
+
+    public void setNbPlaceDispo(int nbPlaceDispo) {
+        this.nbPlaceDispo = nbPlaceDispo;
+    }
+
+    public String getActivite_id() {
+        return activite_id;
+    }
+
+    public void setActivite_id(String activite_id) {
+        this.activite_id = activite_id;
+    }
+    
+    
 }
