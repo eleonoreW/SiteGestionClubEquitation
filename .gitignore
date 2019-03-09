@@ -54,6 +54,8 @@ nbdist/
 /nbproject/private/
 GestionClubEquitation-war/nbproject/project\.xml
 
+*.properties
+
 GestionClubEquitation-war/nbproject/
 
 nbproject/
