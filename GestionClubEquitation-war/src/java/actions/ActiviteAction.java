@@ -87,8 +87,6 @@ public class ActiviteAction {
     }
     
     public String prepare(){
-        LieuDAO lieuDAO = new LieuDAO(ConnectionDB.getInstance());
-        listLieu = lieuDAO.findAll();
         
         ProfesseurDAO profDAO = new ProfesseurDAO(ConnectionDB.getInstance());
         listProf = profDAO.findAll();
