@@ -47,19 +47,36 @@ public class ChevalDAO extends CommonDAO<Cheval> {
 
     @Override
     public boolean delete(Cheval object) {
-      try {
-            PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CHEVAL);
-            
-            statement.setInt(1, object.getCheval_id());
-            
-            statement.executeUpdate();
-            statement.close();
-        } catch(SQLException e) {
+        try {
+
+            if(canSafelyDeleteByID(object.getCheval_id())){
+                PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CHEVAL);
+                statement.setInt(1, object.getCheval_id());
+                statement.executeUpdate();
+                statement.close();
+                return true;
+            }
+            } catch(SQLException e) {
+                e.printStackTrace();
+                return false;
+        }
+        return true;
+    }
+    
+    public boolean canSafelyDeleteByID(int id) {
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.COUNT_ACTIVITE_CHEVAL_ID);
+            statement.setInt(1,id);
+            ResultSet res = statement.executeQuery();
+            if(res.next()){
+                return (res.getInt("nbActivite") == 0);
+            }else{
+                return false;
+            }
+        }catch (SQLException e){
             e.printStackTrace();
             return false;
         }
-        
-        return true;
     }
 
     @Override
@@ -185,13 +202,13 @@ public class ChevalDAO extends CommonDAO<Cheval> {
                 queryString += " AND " + SQLConstant.WITH_RACEID + " " + race.getRace_id() + " ";
             }
             
-        }/*
+        }
         if(proprietaire != null){
             proprietaire = personneDAO.findByMail(proprietaire.getMail());
             if(proprietaire != null){
-                queryString += " AND" + SQLConstant.WITH_RACEID + proprietaire.getRace_id();
+                queryString += " AND" + SQLConstant.WITH_PROPRITAIREID + proprietaire.getId();
             }
-        }*/
+        }
         queryString += " AND " + SQLConstant.WITH_DATENAISSANCE_GEQ+ " " + dateNaissanceMin + " ";
         queryString += " AND " + SQLConstant.WITH_DATENAISSANCE_LEQ+ " " + dateNaissanceMax + " ";
         

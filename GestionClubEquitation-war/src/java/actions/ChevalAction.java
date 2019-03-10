@@ -1,12 +1,17 @@
 package actions;
 
+import com.opensymphony.xwork2.ActionContext;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javabeans.Race;
 import javabeans.Type;
 import javabeans.Cheval;
+import javabeans.Client;
 import javabeans.Personne;
 import javax.servlet.http.HttpServletRequest;
 import models.ChevalDAO;
+import models.ClientDAO;
 import models.ConnectionDB;
 import models.RaceDAO;
 import models.PersonneDAO;
@@ -31,6 +36,10 @@ public class ChevalAction {
     private String raceSelected;
     
     private Cheval cheval;
+    
+    private List<Cheval> listAllCheval;
+
+  
     
     public String createCheval() {
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
@@ -107,7 +116,6 @@ public class ChevalAction {
             listRace = raceDAO.findAll();
             PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
             listProprietaire = personneDAO.findAll();
-            nom = cheval.getNom();
             dateNaissance = Integer.toString(cheval.getDateNaissance());
             description = cheval.getDescription();
             commentaire = cheval.getCommentaire();
@@ -120,6 +128,21 @@ public class ChevalAction {
             return "error";
         }
     }
+    
+    public String gotoClientCheval() {
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());                    
+        List<Cheval> listCheval = new ArrayList<>();
+        listCheval = chevalDAO.findAll();
+        listAllCheval = new ArrayList<>();
+        // si le client est proprietaire d'un cheval on l'ajoute a la liste
+        for(Cheval c : listCheval) {
+            if(c.getProprietaire() != null && c.getProprietaire().getMail().compareTo(session.get("mail").toString()) == 0)
+                listAllCheval.add(c);
+        }
+        return "success";
+    }
 
     public String prepareCreateCheval(){
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
@@ -131,8 +154,32 @@ public class ChevalAction {
         return "success";
     }
 
+    public String deleteCheval(){
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        cheval = chevalDAO.findByName(nom);
+        if(chevalDAO.delete(cheval)){
+            return "success";
+        }else{
+            return "error";
+        }
+        
+    }
+    
+    public String displayAll(){
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());                    
+        listAllCheval = chevalDAO.findAll();
+        
+        return "success";
+    }
+    
     //Getter et setter
+    public List<Cheval> getListAllCheval() {
+        return listAllCheval;
+    }
 
+    public void setListAllCheval(List<Cheval> listAllCheval) {
+        this.listAllCheval = listAllCheval;
+    }
     public String getRace() {
         return race;
     }

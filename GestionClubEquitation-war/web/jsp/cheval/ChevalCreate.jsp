@@ -30,8 +30,14 @@
                         <li>
                             <a class="nav-link" href="gotoActivite">Activités</a>
                         </li>
-                        <li>
-                            <a class="nav-link active" href="gotoCheval">Chevaux</a>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chevaux
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="gotoCheval">Gestion des chevaux</a>
+                                <a class="dropdown-item" href="gotoChevalSearch">Rechercher un cheval</a>
+                            </div>
                         </li>
                         <li>
                             <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
@@ -85,7 +91,7 @@
                 
                 <s:submit value = "submit" align="center"></s:submit>
             </s:form>
-        </div>
+        
         
         </br>
         <hr/>
@@ -93,6 +99,8 @@
         
         <p class="h3" align="center">Liste des chevaux</p>     
         
+        <s:action name="AfficheAllChevaux" executeResult="true"/>
+     </div>   
         <!--TODO-->
       
     <!------ FOOTER ------->  

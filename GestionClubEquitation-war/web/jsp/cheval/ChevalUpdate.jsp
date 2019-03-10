@@ -30,8 +30,14 @@
                         <li>
                             <a class="nav-link" href="">Activités</a>
                         </li>
-                        <li>
-                            <a class="nav-link active" href="">Chevaux</a>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chevaux
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="gotoCheval">Gestion des chevaux</a>
+                                <a class="dropdown-item" href="gotoChevalSearch">Rechercher un cheval</a>
+                            </div>
                         </li>
                         <li>
                             <a class="nav-link" href="connection.jsp">Se déconnecter</a>
@@ -45,9 +51,6 @@
             <h1>Modification de <s:property value="nom"/></h1>
             <s:form action="UpdateCheval" >	
                 
-                <s:textfield name="nom" id="cheval_nom"
-                        label="Nom" labelposition="left" required="required" autofocus="autofocus" readonly="true">
-                </s:textfield>
                 <s:textfield name="description" id="cheval_description"
                              label="Description" labelpostion="left">
                 </s:textfield> 
@@ -78,6 +81,11 @@
                     name="raceSelected" required="required"/>
                 
                 <s:submit value = "submit" align="center"></s:submit>
+                
+            </s:form>
+            
+             <s:form action="DeleteCheval?nom=%{nom}" >		
+            <s:submit value = "Delete" align="center"></s:submit>
             </s:form>
         </div>
       
