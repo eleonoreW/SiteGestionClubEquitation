@@ -1,13 +1,15 @@
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <!------ HEAD ------->  
+     <!------ HEAD ------->  
     <%@ include file="../template/Header.jsp"%>
     <!------ /HEAD ------->  
+
+    <%@ taglib prefix="s" uri="/struts-tags" %>
+
     
     <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+       <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img class="img-fluid" src="img/logo.png" alt="club logo" style="max-height: 50px">
@@ -28,10 +30,10 @@
                             <a class="nav-link" href="gotoAdministrateur">Administrateurs</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="gotoActivite">Activités</a>
+                            <a class="nav-link " href="gotoActivite">Activités</a>
                         </li>
                         <li>
-                            <a class="nav-link active" href="gotoCheval">Chevaux</a>
+                            <a class="nav-link" href="gotoCheval">Chevaux</a>
                         </li>
                         <li>
                             <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
@@ -40,60 +42,71 @@
                 </div>
             </div>
         </nav>  
-        
         <div class="jumbotron" style="margin-top: 65px">
             <div class="container" >
-                <h1 class="display-5">Gestion du cheval</h1>
+                <h1 class="display-5">Gestion activité</h1>
             </div>
         </div>
         <div class="container">
             <center>
-            <p class="h3" >Ajout d'un nouveau cheval</p>
-            <s:form action="createCheval" >	
-                
-                <s:textfield name="nom" id="cheval_nom"
+            <p class="h3" >Ajout d'une nouvelle activité</p>
+            
+            <s:form action="creationActivite" >		
+                <s:textfield name="nom" id="activite_nom"
                         label="Nom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>
-                <s:textfield name="description" id="cheval_description"
-                             label="Description" labelpostion="left">
+                <s:textfield name="details" id="activite_details"
+                             label="Details" labelpostion="left">
                 </s:textfield> 
-                <s:textfield name="commentaire" id="cheval_commentaire"
-                        label="Commentaire" labelposition="left" autofocus="autofocus">
+                
+                <s:textfield type="number" name="date" label="Date" labelposition="left" required="required" 
+                             placeholder="20190113">
+                </s:textfield> 
+                
+                <s:select label="Durée (h)"
+                    name="duree"
+                    headerKey="-1" headerValue="1"
+                    list="{2, 3, 4, 5, 6, 7, 8}"
+                    value="selectedDuree"
+                    required="true" />
+                
+                <s:textfield name="capacite" type="number" id="activite_capacite"
+                        label="Capacité" labelposition="left">
                 </s:textfield>
                 
-                <s:textfield type="number" name="dateNaissance" label="DateNaissance" labelposition="left" required="required" 
-                             placeholder="13012019">
-                </s:textfield> 
+                <s:select label="Lieu"
+                    name="lieuSelected"
+                    headerKey="-1" headerValue="Selectionner lieu"
+                    list="listLieu.{nom}"
+                    required="true" />
                 
-                <s:textfield type="number" name="nbHeureMaxSemaine" label="HeureMaxSemaine" labelposition="left" required="required"
-                             placeholder="20">
-                </s:textfield> 
-                
-                <s:textfield type="number" name="taille" label="Taille" labelposition="left" required="required" 
-                             placeholder="160">
-                </s:textfield> 
-                
-                <s:select label="Proprietaire"
-                    list="listProprietaire.{mail}" 
-                    name="proprietaireSelected"
-                    value ="listProprietaire.{mail}"/>
-                
-                <s:select label="Race" 
-                    list="listRace.{nom}" 
-                    value ="listRace.{nom}"
-                    name="raceSelected" required="required"/>
+                <s:select label="Prof" 
+                    headerKey="-1" headerValue="Selectionner prof"
+                    list="listProf.{mail}" 
+                    name="profSelected"/>
+
+                <s:select label="Type" 
+                    headerKey="-1" headerValue="Selectionner type"
+                    list="listType.{nom}" 
+                    name="typeSelected"/>
+
+                <s:select label="Chevaux"
+                    multiple="true"
+                    headerKey="-1"
+                    list="listCheval.{nom}"
+                    name="listChevalSelected"/>
                 
                 <s:submit value = "submit" align="center"></s:submit>
             </s:form>
+            </br>
+            <hr/>
+            </br>
+            
+            <p class="h3" align="center">Liste des activités</p>     
+        
+            <s:action name="AfficheAllActivites" executeResult="true"/>
         </div>
-        
-        </br>
-        <hr/>
-        </br>
-        
-        <p class="h3" align="center">Liste des chevaux</p>     
-        
-        <!--TODO-->
+      
       
     <!------ FOOTER ------->  
     <%@ include file="../template/Footer.jsp"%>

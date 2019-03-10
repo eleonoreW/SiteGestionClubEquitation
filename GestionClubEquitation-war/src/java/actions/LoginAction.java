@@ -48,7 +48,7 @@ public class LoginAction extends ActionSupport {
                 session.put("password", password);
                 
                 addActionMessage("Connecté en tant qu'administrateur");
-                return "success";
+                return "successAdmin";
             }
             else if (professeurDAO.validate(getMail(), getPassword())){
                 Map<String, Object> session;
@@ -59,7 +59,7 @@ public class LoginAction extends ActionSupport {
                 session.put("password", password);
                 
                 addActionMessage("Connecté en tant que professeur");
-                return "success";
+                return "successProf";
             }
             else if (clientDAO.validate(getMail(), getPassword())){
                 Map<String, Object> session;
@@ -70,7 +70,7 @@ public class LoginAction extends ActionSupport {
                 session.put("password", password);
                 
                 addActionMessage("Connecté en tant que client");
-                return "success";
+                return "successClient";
             }
             else{
                 addActionError("UNKNOW USER!");
@@ -80,6 +80,13 @@ public class LoginAction extends ActionSupport {
                 Logger.getLogger(LoginAction.class.getName()).log(Level.SEVERE, null, "Invalid user error");
                 return ERROR;                 
             }
+        }
+        
+        public String logout() throws Exception { 
+            Map session = ActionContext.getContext().getSession();
+            session.remove("mail"); 
+            session.remove("password");        
+            return SUCCESS;
         }
         
         

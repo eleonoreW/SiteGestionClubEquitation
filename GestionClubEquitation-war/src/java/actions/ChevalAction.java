@@ -30,6 +30,8 @@ public class ChevalAction {
     private String proprietaireSelected;
     private String raceSelected;
     
+    private Cheval cheval;
+    
     public String createCheval() {
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         listRace = raceDAO.findAll();
@@ -44,7 +46,7 @@ public class ChevalAction {
 
             Race race = raceDAO.findByName(raceSelected);
 
-            Cheval cheval = new Cheval(race,proprietaire,nom,Integer.parseInt(dateNaissance),description,commentaire,Integer.parseInt(nbHeureMaxSemaine), Integer.parseInt(taille));
+            cheval = new Cheval(race,proprietaire,nom,Integer.parseInt(dateNaissance),description,commentaire,Integer.parseInt(nbHeureMaxSemaine), Integer.parseInt(taille));
 
             chevalDAO.create(cheval);
 
@@ -58,6 +60,67 @@ public class ChevalAction {
         }
     }
     
+    
+    public String updateCheval() {
+        RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+        listRace = raceDAO.findAll();
+        
+        PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+        listProprietaire = personneDAO.findAll();
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        
+        
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        cheval = chevalDAO.findByName(nom);
+        if(cheval != null){
+            Personne proprietaire = personneDAO.findByMail(proprietaireSelected);
+            Race race = raceDAO.findByName(raceSelected);
+            
+            cheval.setCommentaire(commentaire);
+            cheval.setDateNaissance(Integer.parseInt(dateNaissance));
+            cheval.setDescription(description);
+            cheval.setNbHeureMaxSemaine(Integer.parseInt(nbHeureMaxSemaine));
+            cheval.setProprietaire(proprietaire);
+            cheval.setRace(race);
+            cheval.setTaille(Integer.parseInt(taille));
+            if(chevalDAO.update(cheval)){
+                cheval = chevalDAO.findById(cheval.getCheval_id());
+                return "success";
+            }else{
+                return "error";
+            }
+            
+        }else{
+            return "error";
+        }
+    }
+    
+    public String prepareUpdateCheval(){
+        
+        HttpServletRequest req = ServletActionContext.getRequest();
+        ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+        cheval = chevalDAO.findByName(nom);
+        
+        if(cheval != null){
+            RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
+            listRace = raceDAO.findAll();
+            PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+            listProprietaire = personneDAO.findAll();
+            nom = cheval.getNom();
+            dateNaissance = Integer.toString(cheval.getDateNaissance());
+            description = cheval.getDescription();
+            commentaire = cheval.getCommentaire();
+            nbHeureMaxSemaine = Integer.toString(cheval.getNbHeureMaxSemaine());
+            taille = Integer.toString(cheval.getTaille());
+            
+            
+            return "success";
+        }else {
+            return "error";
+        }
+    }
+
     public String prepareCreateCheval(){
         RaceDAO raceDAO = new RaceDAO(ConnectionDB.getInstance());
         listRace = raceDAO.findAll();
@@ -172,6 +235,14 @@ public class ChevalAction {
 
     public void setRaceSelected(String raceSelected) {
         this.raceSelected = raceSelected;
+    }
+
+    public Cheval getChevalAmodifier() {
+        return cheval;
+    }
+
+    public void setChevalAmodifier(Cheval cheval) {
+        this.cheval = cheval;
     }
    
 }

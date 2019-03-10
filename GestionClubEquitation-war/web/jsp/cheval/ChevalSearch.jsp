@@ -60,7 +60,7 @@
                 <tbody>
                     <s:iterator value="listChevalResult" status="ligne">
                         <tr>
-                            <td><s:property value="nom"/></td>
+                             <td><s:a href="LoadCheval?nom=%{nom}"><s:property value="nom"/></s:a></td>
                             <td><s:property value="dateNaissance"/></td>
                             <td><s:property value="description"/></td>
                             <td><s:property value="commentaire"/></td>

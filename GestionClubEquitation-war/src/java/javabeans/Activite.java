@@ -1,5 +1,7 @@
 package javabeans;
 
+import java.util.ArrayList;
+
 public class Activite {
     private int activite_id;
     private Personne personne;
@@ -12,7 +14,8 @@ public class Activite {
     private float duree;
     private int capacite;
     private boolean est_active;
-    
+    private ArrayList<Cheval> listeChevaux;
+            
     public Activite(int activite_id, Personne personne, Lieu lieu, Type type, String nom, String commentaire,
             String details,int date, float duree, int capacite, boolean est_active){
         this.activite_id = activite_id;
@@ -26,6 +29,21 @@ public class Activite {
         this.duree = duree;
         this.capacite = capacite;
         this.est_active = est_active;
+    }
+
+    public Activite(int activite_id, Personne personne, Lieu lieu, Type type, String nom, String commentaire, String details, int date, float duree, int capacite, boolean est_active, ArrayList<Cheval> listeChevaux) {
+        this.activite_id = activite_id;
+        this.personne = personne;
+        this.lieu = lieu;
+        this.type = type;
+        this.nom = nom;
+        this.commentaire = commentaire;
+        this.details = details;
+        this.date = date;
+        this.duree = duree;
+        this.capacite = capacite;
+        this.est_active = est_active;
+        this.listeChevaux = listeChevaux;
     }
 
     public Activite(Personne personne, Lieu lieu, Type type, String nom, String commentaire, String details, int date, float duree, int capacite, boolean est_active) {
@@ -87,6 +105,22 @@ public class Activite {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
+    }
+
+    public boolean isEst_active() {
+        return est_active;
+    }
+
+    public void setEst_active(boolean est_active) {
+        this.est_active = est_active;
+    }
+
+    public ArrayList<Cheval> getListeChevaux() {
+        return listeChevaux;
+    }
+
+    public void setListeChevaux(ArrayList<Cheval> listeChevaux) {
+        this.listeChevaux = listeChevaux;
     }
     
     

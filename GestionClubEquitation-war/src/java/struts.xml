@@ -14,12 +14,15 @@
             method="execute">
             <result name="success">/connexion.jsp</result>
         </action>
+        
         <action name="gotoChevalSearch" 
             class="actions.SearchChevalAction" 
             method="gotoSearchCheval">
             <result name="success">/jsp/cheval/ChevalSearch.jsp</result>
         </action>
         
+         
+           
         
         <action name="gotoAdministrateur" 
             class="actions.HelloWorldAction" 
@@ -36,6 +39,11 @@
             method="execute">
             <result name="success">/jsp/administrateur/GestionClient.jsp</result>
         </action>
+                <action name="gotoActivite" 
+            class="actions.ActiviteAction"
+            method="prepare">
+            <result name="success">/jsp/administrateur/GestionActivite.jsp</result>
+        </action>
         <action name="gotoCheval" 
             class="actions.ChevalAction" 
             method="prepareCreateCheval">
@@ -46,11 +54,15 @@
         <action name="loginPersonne" 
                 class="actions.LoginAction" 
                 method="execute">         
-            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result>
+            <result name="successAdmin">/jsp/administrateur/GestionAdmin.jsp</result>
+            <result name="successProf">/jsp/administrateur/GestionAdmin.jsp</result>
+            <result name="successClient" type="chain">goToListeActivitesClient</result>
             <result name="error">/connexion.jsp</result>
 	</action>
         
-        
+        <action name="logoutPersonne" class="actions.LoginAction" method="logout" >
+            <result name="success" type="redirect">/connexion.jsp</result>
+        </action>
                              
 <!-- _______________ Gestion administrateurs _______________ -->         
         <action name="AddNewAdminForm" 
@@ -156,5 +168,71 @@
             <result name="success">/jsp/cheval/ChevalCreate.jsp</result> 
             <result name="error">/jsp/cheval/ChevalCreate.jsp</result> 
         </action>   
+        
+        <action name="LoadCheval"
+                class="actions.ChevalAction" 
+                method="prepareUpdateCheval"> 
+            <result name="success">/jsp/cheval/ChevalUpdate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalUpdate.jsp</result> 
+        </action>  
+        
+        <action name="UpdateCheval"
+                class="actions.ChevalAction" 
+                method="updateCheval"> 
+            <result name="success">/jsp/cheval/ChevalUpdate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalUpdate.jsp</result> 
+        </action> 
+        
+<!-- _______________ Gestion Activités _______________ -->        
+        
+         <action name="AfficheAllActivites" 
+                class="actions.ActiviteAction" 
+                method="displayAll"> 
+             <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result> 
+         </action> 
+         
+         <action name="LoadActivite" 
+                class="actions.ActiviteAction" 
+                method="loadActivite"> 
+             <result name="success">/jsp/administrateur/ModifieActivite.jsp</result> 
+         </action> 
+         
+         <action name="UpdateActivite" 
+                class="actions.ActiviteAction" 
+                method="updateActivite"> 
+             <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result> 
+         </action> 
+         
+         <action name="DeleteActivite" 
+                class="actions.ActiviteAction" 
+                method="deleteActivite"> 
+             <result name="success">/jsp/HelloWorld.jsp</result> 
+         </action> 
+         
+         
+         <action name="goToListeActivitesClient"
+                class="actions.ActiviteAction" 
+                method="displayAllFuturDateNotCanceled" >
+            <result name="success">/jsp/client/AfficheAllActivite.jsp</result>
+         </action>
+         
+         <action name="LoadActiviteClient"
+                class="actions.ActiviteAction" 
+                method="loadActiviteClient" >
+            <result name="success">/jsp/client/ReservationActivite.jsp</result>
+         </action>
+         
+        <action name="ReserveActivite"
+            class="actions.ActiviteAction"
+            method="reserver">
+            <result name="success">/jsp/client/AfficheAllActivite.jsp</result>
+        </action>
+         
+        
+        <action name="creationActivite"
+            class="actions.ActiviteAction"
+            method="execute">
+            <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result>
+        </action>
     </package>
 </struts>

@@ -16,6 +16,7 @@
 
     
     <body>
+       
         <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">
@@ -28,27 +29,28 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li>
-                            <a class="nav-link" href="gotoClient">Clients</a>
+                            <a class="nav-link " href="gotoClient">Clients</a>
                         </li>
                         <li>
-                            <a class="nav-link active" href="">Professeurs</a>
+                            <a class="nav-link" href="gotoProfesseur">Professeurs</a>
                         </li>
                         <li>
                             <a class="nav-link" href="gotoAdministrateur">Administrateurs</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="">Activités</a>
+                            <a class="nav-link" href="gotoActivite">Activités</a>
                         </li>
                         <li>
                             <a class="nav-link" href="gotoCheval">Chevaux</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="connection.jsp">Se déconnecter</a>
+                            <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>  
+        </nav>    
+        
         <div class="jumbotron" style="margin-top: 65px">
             <div class="container" >
                 <h1 class="display-5">Gestion des professeurs</h1>

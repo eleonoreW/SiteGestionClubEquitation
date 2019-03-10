@@ -7,7 +7,7 @@
     <!------ /HEAD ------->  
     
     <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+               <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="/">
                     <img class="img-fluid" src="img/logo.png" alt="club logo" style="max-height: 50px">
@@ -19,7 +19,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li>
-                            <a class="nav-link " href="gotoClient">Clients</a>
+                            <a class="nav-link" href="gotoClient">Clients</a>
                         </li>
                         <li>
                             <a class="nav-link " href="gotoProfesseur">Professeurs</a>
@@ -28,37 +28,31 @@
                             <a class="nav-link" href="gotoAdministrateur">Administrateurs</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="gotoActivite">Activités</a>
+                            <a class="nav-link" href="">Activités</a>
                         </li>
                         <li>
-                            <a class="nav-link active" href="gotoCheval">Chevaux</a>
+                            <a class="nav-link active" href="">Chevaux</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
+                            <a class="nav-link" href="connection.jsp">Se déconnecter</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>  
+        </nav> 
         
-        <div class="jumbotron" style="margin-top: 65px">
-            <div class="container" >
-                <h1 class="display-5">Gestion du cheval</h1>
-            </div>
-        </div>
-        <div class="container">
-            <center>
-            <p class="h3" >Ajout d'un nouveau cheval</p>
-            <s:form action="createCheval" >	
+        <div class="container" style="margin-top: 100px;">
+            <h1>Modification de <s:property value="nom"/></h1>
+            <s:form action="UpdateCheval" >	
                 
                 <s:textfield name="nom" id="cheval_nom"
-                        label="Nom" labelposition="left" required="required" autofocus="autofocus">
+                        label="Nom" labelposition="left" required="required" autofocus="autofocus" readonly="true">
                 </s:textfield>
                 <s:textfield name="description" id="cheval_description"
                              label="Description" labelpostion="left">
                 </s:textfield> 
                 <s:textfield name="commentaire" id="cheval_commentaire"
-                        label="Commentaire" labelposition="left" autofocus="autofocus">
+                        label="Commentaire" labelposition="left" autofocus="autofocus" >
                 </s:textfield>
                 
                 <s:textfield type="number" name="dateNaissance" label="DateNaissance" labelposition="left" required="required" 
@@ -76,24 +70,17 @@
                 <s:select label="Proprietaire"
                     list="listProprietaire.{mail}" 
                     name="proprietaireSelected"
-                    value ="listProprietaire.{mail}"/>
+                    value ="chevalAmodifier.{proprietaire}.{mail}"/>
                 
                 <s:select label="Race" 
                     list="listRace.{nom}" 
-                    value ="listRace.{nom}"
+                    value ="chevalAmodifier.{race}.{nom}"
                     name="raceSelected" required="required"/>
                 
                 <s:submit value = "submit" align="center"></s:submit>
             </s:form>
         </div>
-        
-        </br>
-        <hr/>
-        </br>
-        
-        <p class="h3" align="center">Liste des chevaux</p>     
-        
-        <!--TODO-->
+      
       
     <!------ FOOTER ------->  
     <%@ include file="../template/Footer.jsp"%>
