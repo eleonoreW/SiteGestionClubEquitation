@@ -15,7 +15,7 @@
 
             <div class="row" style="margin-top: 150px;">
                 <div class="col-lg-8">
-                    <img class="img-fluid" src="img/chevalAccueil.png">
+                    <img class="img-fluid" src="img/chevalAccueil.jpg">
                 </div>
 
                 <div class="col-lg-4">
