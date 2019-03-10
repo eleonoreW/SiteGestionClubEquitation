@@ -40,8 +40,14 @@
                         <li>
                             <a class="nav-link" href="gotoActivite">Activités</a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="gotoCheval">Chevaux</a>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chevaux
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="gotoCheval">Gestion des chevaux</a>
+                                <a class="dropdown-item" href="gotoChevalSearch">Rechercher un cheval</a>
+                            </div>
                         </li>
                         <li>
                             <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
@@ -54,6 +60,10 @@
         <div class="jumbotron" style="margin-top: 65px">
             <div class="container" >
                 <h1 class="display-5">Gestion des professeurs</h1>
+                
+                <s:if test="#session.mail == null">
+                    This is magic
+                </s:if>
             </div>
         </div>
         <div class="container" >

@@ -32,8 +32,14 @@
                         <li>
                             <a class="nav-link active" href="gotoActivite">Activités</a>
                         </li>
-                        <li>
-                            <a class="nav-link" href="gotoCheval">Chevaux</a>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Chevaux
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="gotoCheval">Gestion des chevaux</a>
+                                <a class="dropdown-item" href="gotoChevalSearch">Rechercher un cheval</a>
+                            </div>
                         </li>
                         <li>
                             <a class="nav-link" href="logoutPersonne">Se déconnecter</a>
