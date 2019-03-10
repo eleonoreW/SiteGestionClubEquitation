@@ -16,10 +16,10 @@
                     <a class="nav-link" href="">A propos</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="">Activités</a>
+                    <a class="nav-link" href="goToListeActivitesHorsCo">Activités</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="gotoChevalSearch">Chevaux</a>
+                    <a class="nav-link" href="gotoChevalSearchHorsCo">Chevaux</a>
                 </li>
                 <li>
                     <a class="nav-link" href="gotoConnexion">Se connecter</a>

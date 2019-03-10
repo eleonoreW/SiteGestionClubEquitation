@@ -21,14 +21,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li>
-                            <!--TODO-->
-                            <a class="nav-link " href="">Reservations</a>
+                            <a class="nav-link " href="LoadReservationClient">Reservations</a>
                         </li>
                         <li>
                             <a class="nav-link active" href="goToListeActivitesClient">Activités</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="gotoCheval">Chevaux</a>
+                            <a class="nav-link" href="gotoChevalClient">Chevaux</a>
                         </li>
                         <li>
                             <a class="nav-link" href="logoutPersonne">Se déconnecter</a>

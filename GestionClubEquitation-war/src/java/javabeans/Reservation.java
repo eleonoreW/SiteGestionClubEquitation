@@ -53,5 +53,7 @@ public class Reservation {
         this.nbPersonne = nbPersonne;
     }
     
-    
+    public void setEstActive(int estActive) {
+        this.estActive = estActive;
+    }
 }

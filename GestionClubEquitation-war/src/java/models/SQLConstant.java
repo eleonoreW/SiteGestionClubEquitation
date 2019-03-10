@@ -27,6 +27,7 @@ public class SQLConstant {
     public static final String WITH_TAILLE_GEQ = " TAILLE >= ";
     public static final String WITH_TAILLE_LEQ = " TAILLE <= ";
     public static final String WITH_TAILLE_EQ  = " TAILLE = ";
+    public static final String COUNT_ACTIVITE_CHEVAL_ID = "SELECT COUNT(*) AS nbActivite FROM Cheval_Activite WHERE ChevalID = ?";
     
     // TYPE
     public static final String SELECT_ALL_TYPE = "SELECT * FROM Type";
@@ -48,6 +49,7 @@ public class SQLConstant {
     public static final String SELECT_ALL_RESERVATION = "SELECT * FROM Reservation";
     public static final String SELECT_ALL_RESERVATION_BY_ID = "SELECT * FROM Reservation WHERE ID=?";
     public static final String SELECT_ALL_RESERVATION_BY_DATE_PERSONNE_ACTIVITE = "SELECT * FROM Reservation WHERE Date=? AND PersonneID=? AND ActiviteID=?";
+    public static final String SELECT_ALL_RESERVATION_FUTUR_DATE_BY_PERSONNE = "SELECT * FROM Reservation WHERE PersonneID = ? AND Date >= ? AND EstActive = 1";
     public static final String INSERT_RESERVATION = "INSERT INTO Reservation (ID, Date, NbPersonne, EstActive,PersonneID, ActiviteID) VALUES (DEFAULT, ?,?,?,?,?)";
     public static final String UPDATE_RESERVATION = "UPDATE Reservation SET Date = ?, NbPersonne = ?, EstActive = ?, PersonneID = ?, ActiviteID = ? WHERE ID = ?";
     public static final String DELETE_RESERVATION = "DELETE FROM Reservation WHERE ID = ?";
@@ -61,7 +63,7 @@ public class SQLConstant {
     public static final String UPDATE_ACTIVITE = "UPDATE Activite SET PersonneID = ?, LieuID = ?, TypeID = ?, Nom = ?, Commentaire = ?, Details = ?, Date = ?, Duree = ?, Capacite = ?, EstActive = ? WHERE ID = ?";
     public static final String DELETE_ACTIVITE = "DELETE FROM Activite WHERE ID = ?";
     public static final String SELECT_ALL_ACTIVITE_FUTUR_DATE_NOT_CANCELED = "SELECT * FROM Activite WHERE Date > ? AND EstActive = true ORDER BY Date";
-    public static final String SUM_PLACE_RESERVEES = "SELECT SUM(NbPersonne) as Count FROM Reservation WHERE ActiviteID = ?";
+    public static final String SUM_PLACE_RESERVEES = "SELECT SUM(NbPersonne) as Count FROM Reservation WHERE ActiviteID = ? AND EstActive = 1";
     
     public static final String ADD_CHEVAL_ACTIVITE = "INSERT INTO Cheval_Activite (ChevalID, ActiviteID) VALUES (?,?)";
     public static final String DELETE_CHEVAL_ACTIVITE = "DELETE FROM Cheval_Activite WHERE ActiviteID = ?";

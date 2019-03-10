@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Iterator;
 import javabeans.Activite;
@@ -163,8 +165,47 @@ public class ReservationDAO extends CommonDAO<Reservation>{
             e.printStackTrace();
         }
 
-        return listReservation;    }
+        return listReservation;
+    }
     
+        public List<Reservation> findAllFuturDateByPersonne(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_RESERVATION_FUTUR_DATE_BY_PERSONNE, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+
+            // get the current date
+            String timeStamp = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+
+            statement.setInt(1, id);
+            statement.setInt(2, Integer.parseInt(timeStamp)); 
+            ResultSet res = statement.executeQuery();
+            
+            Personne personne = null;
+            Activite activite = null;
+            PersonneDAO personneDAO = new PersonneDAO(ConnectionDB.getInstance());
+            ActiviteDAO activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
+            listReservation = new ArrayList<>();
+            
+            while (res.next()) {
+                personne = personneDAO.findById(id);
+                activite = activiteDAO.findById(res.getInt("ActiviteID"));
+                
+                reservation = new Reservation(res.getInt("ID"),res.getInt("Date"), res.getInt("NbPersonne"), res.getInt("EstActive"),personne, activite);
+
+                listReservation.add(reservation);
+            }
+            res.close();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return listReservation;
+    }
+    
+    public void annulerReservation(Reservation reservation) {
+        reservation.setEstActive(0);
+        update(reservation);
+    }
     
     public static void main(String args[]) {
         List<Reservation> listReservation;
