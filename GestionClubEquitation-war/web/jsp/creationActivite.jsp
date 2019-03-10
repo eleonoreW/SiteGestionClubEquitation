@@ -54,7 +54,7 @@
 
                 <s:select label="Chevaux"
                     multiple="true"
-                    headerKey="-1" headerValue="Selectionner chevaux"
+                    headerKey="-1"
                     list="listCheval.{nom}"
                     name="listChevalSelected"/>
                 

@@ -10,30 +10,63 @@
         <h1>Modifier ou supprimer une activite</h1>
         
         
-        <s:form action="ReplaceActivite?id=%{id}" >		
+        <s:form action="UpdateActivite?id=%{id}" >		
 
-            <s:textfield name="nom" id="activite_nom"
-                        label="Nom" labelposition="left" required="required" autofocus="autofocus">
-                </s:textfield>
-                <s:textfield name="details" id="activite_details"
+        <s:textfield name="nom" id="activite_nom"
+                     label="Nom" labelposition="left" required="required" autofocus="autofocus">
+        </s:textfield>
+        <s:textfield name="details" id="activite_details"
                              label="Details" labelpostion="left">
-                </s:textfield> 
+        </s:textfield> 
                 
-                <s:textfield type="number" name="date" label="Date" labelposition="left" required="required" 
+        <s:textfield type="number" name="date" label="Date" labelposition="left" required="required" 
                              placeholder="13012019">
-                </s:textfield> 
+        </s:textfield> 
             
-                <s:select label="Durée (h)"
+        <s:select label="Durée (h)"
                     name="duree"
-                    headerKey="-1" headerValue="1"
-                    list="{2, 3, 4, 5, 6, 7, 8}"
+                    headerValue="%{duree}"
+                   
+                    list="{1, 2, 3, 4, 5, 6, 7, 8}"
                     value="selectedDuree"
                     required="true" />
                 
-                <s:textfield name="capacite" type="number" id="activite_capacite"
+        <s:textfield name="capacite" type="number" id="activite_capacite"
                         label="Capacité" labelposition="left">
-                </s:textfield>
-                <s:submit value = "Update" align="center"></s:submit>
+        </s:textfield>
+        
+        <s:select label="Lieu"
+                    name="lieuSelected"
+                    selected="%{lieuSelected}"
+                    list="listLieu.{nom}"
+                    required="true" />
+        
+        <s:select label="Prof" 
+                    selected="%{profSelected}"
+                    list="listProf.{mail}" 
+                    name="profSelected"/>
+
+                <s:select label="Type" 
+                    selected="%{typeSelected}"
+                    list="listType.{nom}" 
+                    selected="typeSelected"
+                    name="typeSelected"/>
+                
+        <s:select label="Chevaux"
+                    selected="%{listChevalSelected}"
+                    multiple="true"
+                    headerKey="-1"
+                    list="listCheval.{nom}"
+                    name="listChevalSelected"/>
+        
+        <s:textfield name="commentaire" id="activite_commentaire"
+                             label="Commentaire" labelpostion="left">
+        </s:textfield> 
+        
+        <s:checkbox name="estActive" value="%{estActive}" label="L'activite est active"/>
+        
+        
+        <s:submit value = "Update" align="center"></s:submit>
 
         </s:form>
         

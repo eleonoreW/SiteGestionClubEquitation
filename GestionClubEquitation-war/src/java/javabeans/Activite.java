@@ -106,6 +106,22 @@ public class Activite {
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
     }
+
+    public boolean isEst_active() {
+        return est_active;
+    }
+
+    public void setEst_active(boolean est_active) {
+        this.est_active = est_active;
+    }
+
+    public ArrayList<Cheval> getListeChevaux() {
+        return listeChevaux;
+    }
+
+    public void setListeChevaux(ArrayList<Cheval> listeChevaux) {
+        this.listeChevaux = listeChevaux;
+    }
     
     
 }

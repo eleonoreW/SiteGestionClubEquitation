@@ -19,7 +19,8 @@ public class ActiviteDAO extends CommonDAO<Activite> {
 
     private Activite activite;
     private ArrayList<Activite> listActivite = new ArrayList<>();
-
+    private ArrayList<Cheval> listCheval = new ArrayList<>();
+    
     public ActiviteDAO(Connection connection) {
         super(connection);
     }
@@ -91,6 +92,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
 
     @Override
     public boolean delete(Activite object) {
+        //Supression des reservation liées à l'activie
         try{
             PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_RESERVATION);
             statement.setInt(1,object.getActivite_id());
@@ -99,7 +101,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         }catch(SQLException e){
             e.printStackTrace();
         }
-        
+        //Supression des chevaux liés à l'activite
         try{
             PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CHEVAL_ACTIVITE);
             statement.setInt(1,object.getActivite_id());
@@ -108,7 +110,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        
+        //Supression de l'activite
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_ACTIVITE);
             statement.setInt(1, object.getActivite_id());
@@ -124,6 +126,16 @@ public class ActiviteDAO extends CommonDAO<Activite> {
 
     @Override
     public boolean update(Activite object) {
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.DELETE_CHEVAL_ACTIVITE);
+            statement.setInt(1, object.getActivite_id());
+            statement.executeUpdate();
+            statement.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        
         try {
             PreparedStatement statement = connection.prepareStatement(SQLConstant.UPDATE_ACTIVITE);
             
@@ -288,7 +300,7 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         
         int nbPlaceReserv = 0;
         try {
-        PreparedStatement statement = connection.prepareStatement(SQLConstant.SUM_PLACE_DISPO);
+        PreparedStatement statement = connection.prepareStatement(SQLConstant.SUM_PLACE_RESERVEES);
         statement.setInt(1, id);
         
         ResultSet res = statement.executeQuery();
@@ -304,6 +316,27 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         return activite.getCapacite() - nbPlaceReserv;
     }
 
+    public ArrayList<Cheval> findAllChevalActivite(int act_id){
+        listCheval = new ArrayList<>();
+        Cheval cheval = null;
+        
+        try{
+            PreparedStatement statement = connection.prepareStatement(SQLConstant.SELECT_ALL_CHEVAL_ACTIVITE);
+            statement.setInt(1, act_id);
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()) {
+                ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
+                cheval = chevalDAO.findById(res.getInt("ChevalID"));
+                listCheval.add(cheval);
+            }
+            res.close();
+            
+        }catch(SQLException e){
+             e.printStackTrace();
+        }
+        return listCheval;
+    }
     @Override
     public ArrayList<Activite> findAll() {
         listActivite = new ArrayList<>();
@@ -351,11 +384,27 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         return true;
     }
     
-    
+    public int nbPlaceDejaReserver(int id){
+        int nbPlaceReserv = 0;
+        try{
+           PreparedStatement statement = connection.prepareStatement(SQLConstant.SUM_PLACE_RESERVEES);
+           statement.setInt(1, id);
+           ResultSet res = statement.executeQuery();
+        
+        if(res.next()) {
+            nbPlaceReserv = res.getInt("Count");
+        }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return nbPlaceReserv;
+    }
     
     public static void main(String args[]) {
         List<Activite> listActivite;
-
+        List<Cheval> listCheval;
         Activite activite2;
 
         //Personne
@@ -370,11 +419,9 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         Type type = typeDAO.findByName("Promenade au bord de l'eau");
        
         //Chevaux
-        List<Cheval> listCheval;
+        //List<Cheval> listCheval;
         ChevalDAO chevalDAO = new ChevalDAO(ConnectionDB.getInstance());
         listCheval = chevalDAO.findAll();
-        System.out.println("Taille liste cheval");
-        System.out.println(Integer.toString(listCheval.size()));
         
         Activite activite = new Activite(personne, lieu, type, "Activite2", "CommentaireAct2", "DetailsAct2", 222, (float) 2., 45, true);
         if (personne != null) {
@@ -411,6 +458,9 @@ public class ActiviteDAO extends CommonDAO<Activite> {
         Cheval cheval = chevalDAO.findByName("Cookie");
         //ActiviteDAO activiteDAO = new ActiviteDAO(ConnectionDB.getInstance());
         Activite activitetest = activiteDAO.findByName("Activite2");
+        System.out.println("Liste cheval");
+        listCheval = activiteDAO.findAllChevalActivite(1);
+        
         //activiteDAO.addChevalActivite(cheval, activitetest);
         
         

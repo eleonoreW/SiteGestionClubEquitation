@@ -39,9 +39,9 @@
              <result name="success">/jsp/modifieActivite.jsp</result> 
          </action> 
          
-         <action name="ReplaceActivite" 
+         <action name="UpdateActivite" 
                 class="actions.ActiviteAction" 
-                method="replaceActivite"> 
+                method="updateActivite"> 
              <result name="success">/jsp/afficheAllActivites.jsp</result> 
          </action> 
          
