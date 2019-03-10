@@ -52,6 +52,11 @@ public class Reservation {
     public void setNbPersonne(int nbPersonne) {
         this.nbPersonne = nbPersonne;
     }
+
+    public void setEstActive(int estActive) {
+        this.estActive = estActive;
+    }
+    
     
     
 }

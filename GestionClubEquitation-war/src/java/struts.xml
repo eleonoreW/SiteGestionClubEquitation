@@ -85,5 +85,17 @@
             <result name="success">/jsp/activite/AfficheCourantesActivites.jsp</result>
         </action>
         
+        <action name="LoadReservationClient"
+            class="actions.ReservationAction"
+            methode="displayReservationsPourPersonneConnectee">
+            <result name="success">/jsp/reservation/AfficheReservationClient.jsp</result>
+        </action>
+        CancelReservation
+        <action name="CancelReservation"
+            class="actions.ReservationAction"
+            methode="annulerReservation">
+            <result name="success">/jsp/reservation/AfficheReservationClient.jsp</result>
+        </action>
+        
     </package>
 </struts>
