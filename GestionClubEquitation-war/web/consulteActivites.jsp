@@ -48,7 +48,7 @@
             </s:if>
 
             <s:else>
-                Aucune Activite disponible a ce jour
+                <p class="h3" align="center">Aucune Activite disponible a ce jour</p>
             </s:else>
 
         </div>

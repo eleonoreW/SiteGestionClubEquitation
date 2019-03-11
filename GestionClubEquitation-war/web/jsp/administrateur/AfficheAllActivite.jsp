@@ -27,6 +27,6 @@
 </s:if>
   
 <s:else>
-    Aucune activite dans la liste
+    <p class="h3" align="center">Aucune activite dans la liste</p>
 </s:else>
 

@@ -37,9 +37,8 @@
 
 
         <s:form action="loginPersonne" id="login" method="post">
-            <s:textfield type="mail" name="mail" label="Enter Your email * " placeholder="johndoe@gmail.com"/>
-             <s:password  name="password" label="Enter Your Password * " /><br>
-             <s:checkbox name="RememberMe" label="Remember Me" value="RemMe" />
+            <s:textfield type="mail" name="mail" label="Mail"/>
+             <s:password  name="password" label="Password" /><br>
              <s:submit value="Login" align="right" />
         </s:form>
       

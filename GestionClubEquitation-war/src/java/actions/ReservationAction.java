@@ -54,7 +54,7 @@ public class ReservationAction {
         reservationDAO.annulerReservation(reservation);
         
         // reload reservation
-        return displayReservationsPourPersonneConnectee();
+        return "success";
     }
 
     public Reservation getReservation() {

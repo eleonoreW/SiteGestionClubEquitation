@@ -59,7 +59,7 @@
             
             <s:form action="creationActivite" >		
                 <s:textfield name="nom" id="activite_nom"
-                        label="Nom" labelposition="left" required="required" autofocus="autofocus">
+                        label="Titre" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>
                 <s:textfield name="details" id="activite_details"
                              label="Details" labelpostion="left">
@@ -102,7 +102,7 @@
                     list="listCheval.{nom}"
                     name="listChevalSelected"/>
                 
-                <s:submit value = "submit" align="center"></s:submit>
+                <s:submit value = "Ajouter" align="center"></s:submit>
             </s:form>
             </br>
             <hr/>

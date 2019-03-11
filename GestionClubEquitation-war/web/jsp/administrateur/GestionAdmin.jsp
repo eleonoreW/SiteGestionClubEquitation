@@ -73,21 +73,21 @@
             <s:form action="AddNewAdminForm" >		
 
                 <s:textfield name="admin_prenom" id="admin_prenom"
-                        label="prenom" labelposition="left" required="required" autofocus="autofocus">
+                        label="Prenom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>	
                 <s:textfield name="admin_nom" id="admin_nom"
-                        label="nom" labelposition="left" required="required">
+                        label="Nom" labelposition="left" required="required">
                 </s:textfield>	
                 <s:textfield name="admin_mail" id="admin_mail"
-                        label="mail" labelposition="left" required="required">
+                        label="Mail" labelposition="left" required="required">
                 </s:textfield>
                 <s:password name="admin_password" value="%{password}"
-                     label="password" labelposition="left" required="required"></s:password>
+                     label="Password" labelposition="left" required="required"></s:password>
                 <s:textfield name="admin_tel" id="admin_tel"
-                        label="tel" labelposition="left" required="required">
+                        label="Tel" labelposition="left" required="required">
                 </s:textfield>
                 <s:textfield name="admin_datenaissance" id="admin_datenaissance"
-                        label="date de naissance" labelposition="left" required="required">
+                        label="Date de naissance" labelposition="left" required="required">
                 </s:textfield>
                 <s:submit value = "Ajouter" align="center"></s:submit>
 

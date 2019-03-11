@@ -111,12 +111,12 @@
         <s:checkbox name="estActive" value="%{estActive}" label="L'activite est active"/>
         
         
-        <s:submit value = "Update" align="center"></s:submit>
+        <s:submit value = "Mettre à jour" align="center"></s:submit>
 
         </s:form>
         
         <s:form action="DeleteActivite?id=%{id}" >		
-            <s:submit value = "Delete" align="center"></s:submit>
+            <s:submit value = "Supprimer" align="center"></s:submit>
         </s:form>
 
             

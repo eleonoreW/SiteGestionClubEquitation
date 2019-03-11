@@ -16,8 +16,8 @@
     <th scope="col">Nom</th>
     <th scope="col">Prenom</th>
     <th scope="col">Mail</th>
-    <th scope="col">telephone</th>
-    <th scope="col">date de naissance</th>
+    <th scope="col">Telephone</th>
+    <th scope="col">Date de naissance</th>
   </tr>
   </thead>
   <tbody>
@@ -35,7 +35,7 @@
  </s:if>
   
 <s:else>
-    Aucun Client dans la liste
+    <p class="h3" align="center">Aucun Client dans la liste</p>
 </s:else>
   
 

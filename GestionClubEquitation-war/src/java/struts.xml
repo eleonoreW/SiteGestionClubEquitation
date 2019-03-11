@@ -14,7 +14,11 @@
                 method="execute">
             <result name="success">/connexion.jsp</result>
         </action>
-        
+          <action name="gotoAccueil" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/index.jsp</result>
+        </action>
         <action name="gotoChevalSearchHorsCo" 
                 class="actions.SearchChevalAction" 
                 method="gotoSearchCheval">
@@ -241,13 +245,13 @@
         <action name="UpdateActivite" 
                  class="actions.ActiviteAction" 
                  method="updateActivite"> 
-            <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result> 
+            <result name="success" type="chain">gotoActivite</result> 
         </action> 
          
         <action name="DeleteActivite" 
                  class="actions.ActiviteAction" 
                  method="deleteActivite"> 
-            <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result> 
+            <result name="success" type="chain">gotoActivite</result> 
         </action> 
          
          
@@ -272,8 +276,8 @@
         
         <action name="creationActivite"
                 class="actions.ActiviteAction"
-                method="execute">
-            <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result>
+                method="addActivite">
+            <result name="success" type="chain">gotoActivite</result>
         </action>
         
         <!-- _______________ Gestion Reservations _______________ --> 
@@ -287,7 +291,7 @@
         <action name="CancelReservation"
                 class="actions.ReservationAction"
                 method="annulerReservation">
-            <result name="success">/jsp/client/AfficheReservation.jsp</result>
+            <result name="success" type="chain">LoadReservationClient</result>
         </action>
         
     </package>

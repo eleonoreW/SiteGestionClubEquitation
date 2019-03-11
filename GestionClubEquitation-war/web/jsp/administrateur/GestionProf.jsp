@@ -60,10 +60,6 @@
         <div class="jumbotron" style="margin-top: 65px">
             <div class="container" >
                 <h1 class="display-5">Gestion des professeurs</h1>
-                
-                <s:if test="#session.mail == null">
-                    This is magic
-                </s:if>
             </div>
         </div>
         <div class="container" >
@@ -77,24 +73,24 @@
             <s:form action="AddNewProfesseurForm" >		
 
                 <s:textfield name="prof_prenom" id="prof_prenom"
-                        label="prenom" labelposition="left" required="required" autofocus="autofocus">
+                        label="Prenom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>	
                 <s:textfield name="prof_nom" id="prof_nom"
-                        label="nom" labelposition="left" required="required">
+                        label="Nom" labelposition="left" required="required">
                 </s:textfield>	
                 <s:textfield type="number" name="prof_heureSem" id="prof_mail"
-                        label="nombre d'heures par semaine" labelposition="left" required="required">
+                        label="Nombre d'heures par semaine" labelposition="left" required="required">
                 </s:textfield>
                 <s:textfield name="prof_mail" id="prof_mail"
-                        label="mail" labelposition="left" required="required">
+                        label="Mail" labelposition="left" required="required">
                 </s:textfield>
                 <s:password name = "prof_password" value="%{password}"
-                     label="password" labelposition="left" required="required"></s:password>
+                     label="Password" labelposition="left" required="required"></s:password>
                 <s:textfield name="prof_tel" id="prof_tel"
                         label="tel" labelposition="left" required="required">
                 </s:textfield>
                 <s:textfield name="prof_datenaissance" id="prof_datenaissance"
-                        label="date de naissance" labelposition="left" required="required">
+                        label="Date de naissance" labelposition="left" required="required">
                 </s:textfield>
                 <s:submit value = "Ajouter" align="center"></s:submit>
 

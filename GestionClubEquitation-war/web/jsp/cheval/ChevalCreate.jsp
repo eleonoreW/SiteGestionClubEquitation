@@ -89,7 +89,7 @@
                     value ="listRace.{nom}"
                     name="raceSelected" required="required"/>
                 
-                <s:submit value = "submit" align="center"></s:submit>
+                <s:submit value = "Ajouter" align="center"></s:submit>
             </s:form>
         
         

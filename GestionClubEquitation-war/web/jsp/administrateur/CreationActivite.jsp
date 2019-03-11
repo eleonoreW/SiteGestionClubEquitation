@@ -12,7 +12,7 @@
         <!------ /MENU ------>
         
         <div class="container" style="margin-top: 100px;">
-            <h1>Creation activité</h1>
+            <h1>Creation d'une activité</h1>
             <s:form action="creationActivite" >		
                 <s:textfield name="nom" id="activite_nom"
                         label="Nom" labelposition="left" required="required" autofocus="autofocus">
@@ -58,7 +58,7 @@
                     list="listCheval.{nom}"
                     name="listChevalSelected"/>
                 
-                <s:submit value = "submit" align="center"></s:submit>
+                <s:submit value = "Ajouter" align="center"></s:submit>
             </s:form>
         </div>
       

@@ -72,21 +72,21 @@
             <s:form action="AddNewClientForm" >		
 
                 <s:textfield name="client_prenom" id="client_prenom"
-                        label="prenom" labelposition="left" required="required" autofocus="autofocus">
+                        label="Prenom" labelposition="left" required="required" autofocus="autofocus">
                 </s:textfield>	
                 <s:textfield name="client_nom" id="client_nom"
-                        label="nom" labelposition="left" required="required">
+                        label="Nom" labelposition="left" required="required">
                 </s:textfield>	
                 <s:textfield name="client_mail" id="client_mail"
-                        label="mail" labelposition="left" required="required">
+                        label="Mail" labelposition="left" required="required">
                 </s:textfield>
                 <s:password name="client_password" value="%{password}"
-                     label="password" labelposition="left" required="required"></s:password>
+                     label="Password" labelposition="left" required="required"></s:password>
                 <s:textfield name="client_tel" id="client_tel"
-                        label="tel" labelposition="left" required="required">
+                        label="Tel" labelposition="left" required="required">
                 </s:textfield>
                 <s:textfield name="client_datenaissance" id="client_datenaissance"
-                        label="date de naissance" labelposition="left" required="required">
+                        label="Date de naissance" labelposition="left" required="required">
                 </s:textfield>
                 <s:submit value = "Ajouter" align="center"></s:submit>
 

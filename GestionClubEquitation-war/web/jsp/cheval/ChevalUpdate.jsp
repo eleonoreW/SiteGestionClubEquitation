@@ -80,12 +80,12 @@
                     value ="chevalAmodifier.{race}.{nom}"
                     name="raceSelected" required="required"/>
                 
-                <s:submit value = "submit" align="center"></s:submit>
+                <s:submit value = "Mettre a jour" align="center"></s:submit>
                 
             </s:form>
             
              <s:form action="DeleteCheval?nom=%{nom}" >		
-            <s:submit value = "Delete" align="center"></s:submit>
+            <s:submit value = "Supprimer" align="center"></s:submit>
             </s:form>
         </div>
       

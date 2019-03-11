@@ -13,7 +13,7 @@
             <ul class="navbar-nav ml-auto">
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="">A propos</a>
+                    <a class="nav-link" href="gotoAccueil">Accueil</a>
                 </li>
                 <li>
                     <a class="nav-link" href="goToListeActivitesHorsCo">Activités</a>
