@@ -22,7 +22,7 @@
                 
 
                
-  <header class=" text-white " style="margin-top: 125px;">
+  <header class=" text-white " style="margin-top: 125px;margin-bottom: 300px;">
     <div class="container">
       <div class="row">
         <div class="col-xl-9 mx-auto">
