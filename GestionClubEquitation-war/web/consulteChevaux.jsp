@@ -76,7 +76,7 @@
                     </table>
                 </s:if>
                 <s:else>
-                    Pas de chevaux à consulter.
+                    <p class="h3" align="center">Pas de chevaux à consulter.</p>
                 </s:else> 
         </div>
 
@@ -84,5 +84,3 @@
         <%@ include file="jsp/template/Footer.jsp"%>
         <!------ /FOOTER ------->   
 
-    </body>
-</html>

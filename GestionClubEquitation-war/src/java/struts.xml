@@ -9,6 +9,12 @@
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">  
         <!-- _______________ Redirections _______________ -->    
+        <action name="gotoAccessDenied" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/jsp/other/AccessDenied.jsp</result>
+        </action>
+        
         <action name="gotoConnexion" 
                 class="actions.HelloWorldAction" 
                 method="execute">

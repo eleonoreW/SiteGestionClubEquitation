@@ -10,39 +10,41 @@
     <!------ HEAD ------->  
     <%@ include file="jsp/template/Header.jsp"%>
     <!------ /HEAD ------->  
-    
+
     <body>
         <!------ MENU ------>
         <%@ include file="jsp/template/Menu.jsp"%>
         <!------ /MENU ------>
-        
-        
+
+
         <%@ taglib prefix="s" uri="/struts-tags" %>
 
-        <center><h2 style="margin-top: 100px">Connexion</h2>
+    <center><h2 style="margin-top: 100px">Connexion</h2>
 
 
         <s:if test="hasActionErrors()">
 
 
-         <div class="errors">
-           <s:actionerror/>
-        </div>
+            <div class="errors">
+                <s:actionerror/>
+            </div>
         </s:if>    
 
 
-         <div class="errors">
-             <s:actionmessage/>
+        <div class="errors">
+            <s:actionmessage/>
         </div>
 
 
         <s:form action="loginPersonne" id="login" method="post">
             <s:textfield type="mail" name="mail" label="Mail"/>
-             <s:password  name="password" label="Password" /><br>
-             <s:submit value="Login" align="right" />
+            <s:password  name="password" label="Password" /><br>
+            <s:submit value="Login" align="right" />
         </s:form>
-      
-  
-    
-   </body>
-</html>
+
+
+
+
+        <!------ FOOTER ------->  
+        <%@ include file="jsp/template/Footer.jsp"%>
+        <!------ /FOOTER ------->   

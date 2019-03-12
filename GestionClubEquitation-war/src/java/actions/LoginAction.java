@@ -46,6 +46,7 @@ public class LoginAction extends ActionSupport {
                 //register mail and password as session var
                 session.put("mail", mail);
                 session.put("password", password);
+                session.put("typePersonne", "admin");
                 
                 addActionMessage("Connecté en tant qu'administrateur");
                 return "successAdmin";
@@ -57,6 +58,7 @@ public class LoginAction extends ActionSupport {
                 //register mail and password as session var
                 session.put("mail", mail);
                 session.put("password", password);
+                session.put("typePersonne", "admin");
                 
                 addActionMessage("Connecté en tant que professeur");
                 return "successProf";
@@ -68,6 +70,7 @@ public class LoginAction extends ActionSupport {
                 //register mail and password as session var
                 session.put("mail", mail);
                 session.put("password", password);
+                session.put("typePersonne", "client");
                 
                 addActionMessage("Connecté en tant que client");
                 return "successClient";
@@ -85,7 +88,8 @@ public class LoginAction extends ActionSupport {
         public String logout() throws Exception { 
             Map session = ActionContext.getContext().getSession();
             session.remove("mail"); 
-            session.remove("password");        
+            session.remove("password");   
+            session.remove("typePersonne");   
             return SUCCESS;
         }
         

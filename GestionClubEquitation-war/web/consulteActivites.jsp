@@ -36,12 +36,12 @@
                     </tr>
                     <s:iterator value="listActivite" status="ligne">
                         <tr>
-                        <td><s:property value="nom"/></td>
-                        <td><s:property value="type.getNom()"/></td>
-                        <td><s:property value="lieu.getNom()"/></td>
-                        <td><s:property value="details"/></td>
-                        <td><s:property value="duree"/></td>
-                        <td><s:property value="date"/></td>
+                            <td><s:property value="nom"/></td>
+                            <td><s:property value="type.getNom()"/></td>
+                            <td><s:property value="lieu.getNom()"/></td>
+                            <td><s:property value="details"/></td>
+                            <td><s:property value="duree"/></td>
+                            <td><s:property value="date"/></td>
                         </tr>
                     </s:iterator>
                 </table>
@@ -56,6 +56,3 @@
         <!------ FOOTER ------->  
         <%@ include file="jsp/template/Footer.jsp"%>
         <!------ /FOOTER ------->   
-
-    </body>
-</html>
