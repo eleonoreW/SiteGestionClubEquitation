@@ -5,13 +5,13 @@ public class Cheval {
     private Race race;
     private Personne proprietaire;
     private String nom;
-    private String dateNaissance;
+    private int dateNaissance;
     private String description;
     private String commentaire;
     private int nbHeureMaxSemaine;
     private int taille;
 
-    public Cheval(int cheval_id, Race race, Personne proprietaire, String nom, String dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
+    public Cheval(int cheval_id, Race race, Personne proprietaire, String nom, int dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
         this.cheval_id = cheval_id;
         this.race = race;
         this.proprietaire = proprietaire;
@@ -23,7 +23,7 @@ public class Cheval {
         this.taille = taille;
     }
 
-    public Cheval(Race race, Personne proprietaire, String nom, String dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
+    public Cheval(Race race, Personne proprietaire, String nom, int dateNaissance, String description, String commentaire, int nbHeureMaxSemaine, int taille) {
         this.race = race;
         this.proprietaire = proprietaire;
         this.nom = nom;
@@ -38,6 +38,10 @@ public class Cheval {
         return cheval_id;
     }
 
+    public void setCheval_id(int cheval_id) {
+        this.cheval_id = cheval_id;
+    }
+
     public Race getRace() {
         return race;
     }
@@ -50,7 +54,7 @@ public class Cheval {
         return nom;
     }
 
-    public String getDateNaissance() {
+    public int getDateNaissance() {
         return dateNaissance;
     }
 
@@ -70,7 +74,37 @@ public class Cheval {
         return taille;
     }
 
-    
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public void setProprietaire(Personne proprietaire) {
+        this.proprietaire = proprietaire;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDateNaissance(int dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
+
+    public void setNbHeureMaxSemaine(int nbHeureMaxSemaine) {
+        this.nbHeureMaxSemaine = nbHeureMaxSemaine;
+    }
+
+    public void setTaille(int taille) {
+        this.taille = taille;
+    }
     
     
 }

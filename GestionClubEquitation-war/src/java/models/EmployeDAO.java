@@ -1,5 +1,11 @@
 package models;
 
-public class EmployeDAO {
-    
+import java.sql.Connection;
+
+
+
+public class EmployeDAO extends PersonneDAO{
+    public EmployeDAO(Connection connection) {
+            super(connection);
+        }
 }

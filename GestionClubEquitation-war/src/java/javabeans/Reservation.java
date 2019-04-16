@@ -24,6 +24,36 @@ public class Reservation {
         this.personne = personne;
         this.activite = activite;
     }
+
+    public int getReservation_ID() {
+        return reservation_ID;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public int getNbPersonne() {
+        return nbPersonne;
+    }
+
+    public int getEstActive() {
+        return estActive;
+    }
+
+    public Personne getPersonne() {
+        return personne;
+    }
+
+    public Activite getActivite() {
+        return activite;
+    }
+
+    public void setNbPersonne(int nbPersonne) {
+        this.nbPersonne = nbPersonne;
+    }
     
-    
+    public void setEstActive(int estActive) {
+        this.estActive = estActive;
+    }
 }

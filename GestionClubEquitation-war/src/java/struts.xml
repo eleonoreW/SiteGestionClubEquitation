@@ -1,0 +1,304 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">  
+        <!-- _______________ Redirections _______________ -->    
+        <action name="gotoAccessDenied" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/jsp/other/AccessDenied.jsp</result>
+        </action>
+        
+        <action name="gotoConnexion" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/connexion.jsp</result>
+        </action>
+          <action name="gotoAccueil" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/index.jsp</result>
+        </action>
+        <action name="gotoChevalSearchHorsCo" 
+                class="actions.SearchChevalAction" 
+                method="gotoSearchCheval">
+            <result name="success">/consulteChevaux.jsp</result>
+        </action>
+              
+        <action name="goToListeActivitesHorsCo"
+                 class="actions.ActiviteAction" 
+                 method="displayAllFuturDateNotCanceled" >
+            <result name="success">/consulteActivites.jsp</result>
+        </action>
+         
+         
+        <action name="gotoChevalClient" 
+                     class="actions.ChevalAction" 
+                     method="gotoClientCheval">
+            <result name="success">/jsp/client/ConsulteCheval.jsp</result>
+        </action>
+          
+        
+        <action name="gotoAdministrateur" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result>
+        </action>
+        <action name="gotoProfesseur" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/jsp/administrateur/GestionProf.jsp</result>
+        </action>
+        <action name="gotoClient" 
+                class="actions.HelloWorldAction" 
+                method="execute">
+            <result name="success">/jsp/administrateur/GestionClient.jsp</result>
+        </action>
+        <action name="gotoActivite" 
+                        class="actions.ActiviteAction"
+                        method="prepare">
+            <result name="success">/jsp/administrateur/GestionActivite.jsp</result>
+        </action>
+        <action name="gotoCheval" 
+                class="actions.ChevalAction" 
+                method="prepareCreateCheval">
+            <result name="success">/jsp/cheval/ChevalCreate.jsp</result>
+        </action>
+        <action name="gotoChevalSearch" 
+                 class="actions.SearchChevalAction" 
+                 method="gotoSearchCheval">
+            <result name="success">/jsp/cheval/ChevalSearch.jsp</result>
+        </action>
+ 
+        <!-- _______________ Gestion connexion _______________ --> 
+        <action name="loginPersonne" 
+                class="actions.LoginAction" 
+                method="execute">         
+            <result name="successAdmin">/jsp/administrateur/GestionAdmin.jsp</result>
+            <result name="successProf">/jsp/administrateur/GestionAdmin.jsp</result>
+            <result name="successClient" type="chain">goToListeActivitesClient</result>
+            <result name="error">/connexion.jsp</result>
+        </action>
+        
+        <action name="logoutPersonne" class="actions.LoginAction" method="logout" >
+            <result name="success" type="redirect">/connexion.jsp</result>
+        </action>
+                   
+        <action name="AddNewClientFormHorsCo" 
+                class="actions.ClientAction" 
+                method="register"> 
+            <result name="success">/connexion.jsp</result> 
+        </action>                      
+                                                 
+        <!-- _______________ Gestion administrateurs _______________ -->         
+        <action name="AddNewAdminForm" 
+                class="actions.AdminAction" 
+                method="register"> 
+            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
+        </action> 
+         
+        <action name="AfficheAllAdministrateurs" 
+                 class="actions.AdminAction" 
+                 method="displayAll"> 
+            <result name="success">/jsp/administrateur/AfficheAllAdmin.jsp</result> 
+        </action> 
+         
+        <action name="LoadAdmin" 
+                 class="actions.AdminAction" 
+                 method="loadAdmin"> 
+            <result name="success">/jsp/administrateur/ModifieAdmin.jsp</result> 
+        </action> 
+         
+        <action name="ReplaceAdmin" 
+                 class="actions.AdminAction" 
+                 method="replaceAdmin"> 
+            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
+        </action> 
+         
+        <action name="DeleteAdmin" 
+                 class="actions.AdminAction" 
+                 method="deleteAdmin"> 
+            <result name="success">/jsp/administrateur/GestionAdmin.jsp</result> 
+        </action> 
+        <!-- _______________ Gestion professeurs _______________ -->         
+        <action name="AddNewProfesseurForm" 
+                class="actions.ProfesseurAction" 
+                method="register"> 
+            <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+        </action> 
+         
+        <action name="AfficheAllProfesseurs" 
+                 class="actions.ProfesseurAction" 
+                 method="displayAll"> 
+            <result name="success">/jsp/administrateur/AfficheAllProfesseur.jsp</result> 
+        </action> 
+         
+        <action name="LoadProfesseur" 
+                 class="actions.ProfesseurAction" 
+                 method="loadProfesseur"> 
+            <result name="success">/jsp/administrateur/ModifieProfesseur.jsp</result> 
+        </action> 
+         
+        <action name="ReplaceProfesseur" 
+                 class="actions.ProfesseurAction" 
+                 method="replaceProfesseur"> 
+            <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+        </action> 
+         
+        <action name="DeleteProfesseur" 
+                 class="actions.ProfesseurAction" 
+                 method="deleteProfesseur"> 
+            <result name="success">/jsp/administrateur/GestionProf.jsp</result> 
+        </action>     
+         
+        <!-- _______________ Gestion clients _______________ -->         
+        <action name="AddNewClientForm" 
+                class="actions.ClientAction" 
+                method="register"> 
+            <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+        </action> 
+         
+        <action name="AfficheAllClients" 
+                 class="actions.ClientAction" 
+                 method="displayAll"> 
+            <result name="success">/jsp/administrateur/AfficheAllClient.jsp</result> 
+        </action> 
+         
+        <action name="LoadClient" 
+                 class="actions.ClientAction" 
+                 method="loadClient"> 
+            <result name="success">/jsp/administrateur/ModifieClient.jsp</result> 
+        </action> 
+         
+        <action name="ReplaceClient" 
+                 class="actions.ClientAction" 
+                 method="replaceClient"> 
+            <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+        </action> 
+         
+        <action name="DeleteClient" 
+                 class="actions.ClientAction" 
+                 method="deleteClient"> 
+            <result name="success">/jsp/administrateur/GestionClient.jsp</result> 
+        </action>   
+         
+        <!-- _______________ Gestion chevaux _______________ -->           
+        <action name="searchCheval" 
+                class="actions.SearchChevalAction" 
+                method="prepare"> 
+            <result name="success">/jsp/cheval/ChevalSearch.jsp</result> 
+        </action>    
+        
+        <action name="ConsulteCheval" 
+                class="actions.SearchChevalAction" 
+                method="prepare"> 
+            <result name="success">/consulteChevaux.jsp</result> 
+        </action>  
+        
+        <action name="createCheval" 
+                class="actions.ChevalAction" 
+                method="createCheval"> 
+            <result name="success">/jsp/cheval/ChevalCreate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalCreate.jsp</result> 
+        </action>   
+        
+        <action name="LoadCheval"
+                class="actions.ChevalAction" 
+                method="prepareUpdateCheval"> 
+            <result name="success">/jsp/cheval/ChevalUpdate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalUpdate.jsp</result> 
+        </action>  
+        
+        <action name="AfficheAllChevaux" 
+                 class="actions.ChevalAction" 
+                 method="displayAll"> 
+            <result name="success">/jsp/cheval/AfficheAllChevaux.jsp</result> 
+        </action> 
+        
+        <action name="UpdateCheval"
+                class="actions.ChevalAction" 
+                method="updateCheval"> 
+            <result name="success">/jsp/cheval/ChevalUpdate.jsp</result> 
+            <result name="error">/jsp/cheval/ChevalUpdate.jsp</result> 
+        </action> 
+        <action name="DeleteCheval"
+                class="actions.ChevalAction" 
+                method="deleteCheval"> 
+            <result name="success" type="chain">gotoChevalSearch</result> 
+            <result name="error">/jsp/cheval/ChevalSearch.jsp</result> 
+        </action> 
+        
+        <!-- _______________ Gestion Activités _______________ -->        
+        
+        <action name="AfficheAllActivites" 
+                 class="actions.ActiviteAction" 
+                 method="displayAll"> 
+            <result name="success">/jsp/administrateur/AfficheAllActivite.jsp</result> 
+        </action> 
+         
+        <action name="LoadActivite" 
+                 class="actions.ActiviteAction" 
+                 method="loadActivite"> 
+            <result name="success">/jsp/administrateur/ModifieActivite.jsp</result> 
+        </action> 
+         
+        <action name="UpdateActivite" 
+                 class="actions.ActiviteAction" 
+                 method="updateActivite"> 
+            <result name="success" type="chain">gotoActivite</result> 
+        </action> 
+         
+        <action name="DeleteActivite" 
+                 class="actions.ActiviteAction" 
+                 method="deleteActivite"> 
+            <result name="success" type="chain">gotoActivite</result> 
+        </action> 
+         
+         
+        <action name="goToListeActivitesClient"
+                 class="actions.ActiviteAction" 
+                 method="displayAllFuturDateNotCanceled" >
+            <result name="success">/jsp/client/AfficheAllActivite.jsp</result>
+        </action>
+         
+        <action name="LoadActiviteClient"
+                 class="actions.ActiviteAction" 
+                 method="loadActiviteClient" >
+            <result name="success">/jsp/client/ReservationActivite.jsp</result>
+        </action>
+         
+        <action name="ReserveActivite"
+                class="actions.ActiviteAction"
+                method="reserver">
+            <result name="success" type="chain">goToListeActivitesClient</result>
+        </action>
+         
+        
+        <action name="creationActivite"
+                class="actions.ActiviteAction"
+                method="addActivite">
+            <result name="success" type="chain">gotoActivite</result>
+        </action>
+        
+        <!-- _______________ Gestion Reservations _______________ --> 
+
+        <action name="LoadReservationClient"
+                class="actions.ReservationAction"
+                method="displayReservationsPourPersonneConnectee">
+            <result name="success">/jsp/client/AfficheReservation.jsp</result>
+        </action>
+        
+        <action name="CancelReservation"
+                class="actions.ReservationAction"
+                method="annulerReservation">
+            <result name="success" type="chain">LoadReservationClient</result>
+        </action>
+        
+    </package>
+</struts>

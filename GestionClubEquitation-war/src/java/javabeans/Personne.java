@@ -1,42 +1,39 @@
 package javabeans;
 
 public class Personne {
-    private int personne_id;
+    private int id;
     private String nom;
     private String prenom;
     private String mail;
     private String telephone;
     private int date_naissance;
-    private int nbHeureMaxSemaine;
-    private String discriminator;
+    private String password;
+
+    public Personne(int id, String nom, String prenom, String mail, String telephone, int date_naissance, String password) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.telephone = telephone;
+        this.date_naissance = date_naissance;
+        this.password = password;
+    }
    
     public Personne(){}
     
-    public Personne(int personne_id, String nom, String prenom, String mail, String telephone, int date_naissance, int nbHeureMaxSemaine, String discriminator){
-        this.personne_id = personne_id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.mail = mail;
-        this.telephone = telephone;
-        this.date_naissance = date_naissance;
-        this.nbHeureMaxSemaine = nbHeureMaxSemaine;
-        this.discriminator = discriminator;
-    }
-    
-    public Personne(String nom, String prenom, String mail, String telephone, int date_naissance, int nbHeureMaxSemaine, String discriminator){
-        this.personne_id = -1;
+    public Personne(String nom, String prenom, String mail, String telephone, int date_naissance, String password){
+        this.id = -1;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;
         this.telephone = telephone;
         this.telephone = telephone;
         this.date_naissance = date_naissance;
-        this.nbHeureMaxSemaine = nbHeureMaxSemaine;
-        this.discriminator = discriminator;
+        this.password = password;
     }
     
-    public int getPersonne_id() {
-        return personne_id;
+    public int getId() {
+        return id;
     }
 
     public String getNom() {
@@ -59,13 +56,35 @@ public class Personne {
         return date_naissance;
     }
 
-    public int getNbHeureMaxSemaine() {
-        return nbHeureMaxSemaine;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDiscriminator() {
-        return discriminator;
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setDate_naissance(int date_naissance) {
+        this.date_naissance = date_naissance;
     }
     
-}
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+}

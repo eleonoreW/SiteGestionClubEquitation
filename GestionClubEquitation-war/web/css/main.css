@@ -1,0 +1,28 @@
+
+h3 {
+    text-align: center;
+}
+
+// ----- MENU -----
+.littleMAJ {
+    font-variant: Small-Caps;
+}
+
+
+body, html {
+  height: 90%;
+  margin:0;
+}
+
+.bg { 
+  /* The image used */
+  background-image: url("http://www.mariacenoura.pt/ptpictures/f/116/1165738_horse-riding-wallpaper.jpg");
+
+  /* Full height */
+  height: 90%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
